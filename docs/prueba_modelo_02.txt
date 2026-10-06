@@ -1,0 +1,52 @@
+Modelo y parámetros fijos de esta prueba
+semilla 42 | sin techo de tokens
+
+======================================================================
+PRUEBA 1 | temperatura 0.7 | razonamiento none
+tokens entrada 61 | salida 211 | tiempo 0.9 s
+----------------------------------------------------------------------
+¡Buenos días, Madrid! ☀️ Tenemos una noticia que nos tiene emocionados. Hemos cruzado el océano para traeros lo mejor de Colombia directamente a nuestras tazas. 💚☕
+
+Este nuevo café de especialidad es puro aroma, dulzura y energía. Cada sorbo te transporta a las montañas andinas, ideal para empezar tu día con buen pie o para disfrutar de un merecido pausa.
+
+No es solo café, es una experiencia. Ven a probarlo hoy mismo y descubre por qué nos ha conquistado. Te esperamos con una sonrisa y una taza caliente.
+
+📍 [Dirección de la cafetería]
+⏰ Abierto de 8:00 a 20:00
+
+¿Cuál es tu momento favorito del día para un café? Cuéntanos en comentarios. 👇
+
+#CaféDeEspecialidad #MadridCafé #Colombia #CafeteríaMadrid #CaféDelDía
+
+======================================================================
+PRUEBA 2 | temperatura 0.7 | razonamiento low
+tokens entrada 89 | salida 1140 | tiempo 2.4 s
+----------------------------------------------------------------------
+¡Buenos días, Madrid! ☕☀️
+
+Llegó el momento que estábamos esperando. Hemos traído un café de especialidad de Colombia que te va a volar la cabeza. Notas de chocolate, caramelo y un toque cítrico que te va a hacer cerrar los ojos y sonreír.
+
+Lo tostamos con amor, lo preparamos con pasión y lo servimos con la misma calidez de siempre.
+
+Pasa a probarlo esta semana y cuéntanos qué te parece. Queremos saber si es tu nuevo favorito (spoiler: lo va a ser).
+
+Te esperamos con los brazos abiertos y la cafetera llena. 💛
+
+#CaféDeEspecialidad #Colombia #MadridCafé #CafeteríaMadrid #AmantesDelCafé
+
+======================================================================
+PRUEBA 3 | temperatura 0.7 | razonamiento medium
+tokens entrada 59 | salida 1708 | tiempo 3.9 s
+----------------------------------------------------------------------
+¡Buenas, Madrid! ☕🇨🇴
+
+Os traemos algo que os va a hacer cerrar los ojos y sonreír. Nuestro nuevo café de especialidad llega directo de las montañas colombianas, tostado en pequeños lotes para que cada taza tenga ese dulzor a caramelo y notas de naranja que te van a volver loco/a.
+
+No es un café cualquiera. Es el que te pide repetir, el que huele al abrir la bolsa y te olvida el mundo.
+
+Os lo esperamos en barra, como siempre, con esa sonrisa de siempre.
+
+Venid a probarlo esta semana y ponedle nombre a vuestra nueva obsesión. 🫶
+
+#CaféDeEspecialidad #MadridCafetería #CaféColombiano #CaféDeOrigen #CaféMadrid
+
