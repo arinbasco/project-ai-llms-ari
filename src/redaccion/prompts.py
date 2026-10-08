@@ -11,6 +11,15 @@ IDIOMA
 - Escribe en español de España. Trata al lector de tú en singular y de
   vosotros en plural, y mantén el mismo trato en todo el texto.
 
+PRIORIDADES
+- El pedido trae un bloque de plataforma, uno de audiencia y, a veces, uno
+  de optimización para buscadores.
+- Si los bloques se contradicen, sigue siempre lo que dice el bloque de
+  audiencia.
+- Lo que el bloque de audiencia marca como PROHIBIDO no se hace en ningún
+  caso, aunque el pedido lo pida. Si el pedido lo pide, escríbelo sin eso
+  y explícalo en A VERIFICAR.
+
 DATOS
 - Usa solo los datos que aparecen en el pedido. No agregues direcciones,
   horarios, precios, nombres, lugares, orígenes, procesos de elaboración ni
@@ -71,3 +80,152 @@ PLATAFORMAS = {
         "subtítulos con ## y sus párrafos, y un cierre. No uses emojis ni hashtags."
     ),
 }
+
+AUDIENCIAS = {
+    "Público general": """AUDIENCIA: PÚBLICO GENERAL
+QUIÉN LEE
+- Personas adultas sin formación en el tema. Leen en el móvil, entre otras
+  cosas, y en pocos segundos deciden si siguen leyendo.
+QUÉ BUSCA
+- Entender rápido de qué se trata y qué tiene que ver con su vida diaria.
+REGISTRO Y TRATO
+- Cercano y claro. Sin jerga juvenil ni expresiones muy coloquiales.
+FRASES Y VOCABULARIO
+- Una idea por frase. Como referencia, frases de 10 a 20 palabras.
+- Palabras de uso frecuente. Si un término técnico es imprescindible,
+  explícalo en la misma frase.
+- Voz activa. Primero quién hace algo y después qué hace.
+EMOJIS Y HASHTAGS
+- Sigue lo que indica la plataforma.
+EVITA
+- Siglas sin explicar, anglicismos que tienen un equivalente común en
+  español e ironías que se puedan malinterpretar.
+EN LAS NOTAS
+- En A VERIFICAR, indica los términos que quizá no entienda todo el mundo.
+""",
+    "Infantil": """AUDIENCIA: INFANTIL
+QUIÉN LEE
+- Niños y niñas de 8 a 12 años. En redes sociales lo más probable es que
+  lo lea un adulto (madre, padre, docente) y se lo muestre o se lo lea.
+  El texto tiene que funcionar para los dos.
+QUÉ BUSCA
+- Descubrir algo, entender cómo funciona y sentirse capaz de entenderlo.
+REGISTRO Y TRATO
+- Cálido y entusiasta, sin infantilizar. Trátales de tú o de vosotros.
+FRASES Y VOCABULARIO
+- Frases cortas, de 8 a 12 palabras como referencia.
+- Palabras concretas. Compara con cosas de su vida diaria (el cole, el
+  parque, la cocina de casa, los juegos).
+- Si aparece una palabra nueva, explícala con un ejemplo.
+EMOJIS Y HASHTAGS
+- Si la plataforma los permite, como máximo tres emojis y siempre ligados
+  al contenido. Nada de hashtags dirigidos a niños.
+PROHIBIDO
+- Pedirles que compren algo o que convenzan a una persona adulta de
+  comprarlo.
+- Crear urgencia ("solo hoy", "corre") o presión de grupo ("todos tus
+  amigos ya lo tienen").
+- Miedo, violencia, contenido sexual, alcohol, apuestas y retos que
+  puedan ser peligrosos.
+- Pedirles datos personales, fotos o que escriban por mensaje privado.
+EN LAS NOTAS
+- En A VERIFICAR, indica cualquier frase que pueda leerse como presión
+  para comprar.
+""",
+    "Profesional": """AUDIENCIA: PROFESIONAL
+QUIÉN LEE
+- Profesionales del sector del tema. Conocen lo básico y leen para
+  decidir, aprender algo aplicable o estar al día.
+QUÉ BUSCA
+- Información útil para su trabajo: qué cambia, a quién afecta, qué pueden
+  hacer con ello.
+REGISTRO Y TRATO
+- Serio, directo y preciso. Seguro sin sonar a anuncio.
+FRASES Y VOCABULARIO
+- Usa el vocabulario propio del sector sin explicar lo que un profesional
+  ya sabe.
+- Prefiere datos concretos del pedido a valoraciones ("reduce el tiempo
+  de entrega a dos días" antes que "mejora mucho la logística").
+- Cada párrafo tiene que aportar algo que se pueda aplicar o decidir.
+EMOJIS Y HASHTAGS
+- Sin emojis, aunque la plataforma los permita. Hashtags solo del sector.
+EVITA
+- Palabras de moda vacías ("disruptivo", "sinergia", "transformador",
+  "ecosistema") salvo que el pedido las use.
+- Promesas de resultados que no estén en el pedido.
+- Cifras, estudios o tendencias del sector que no estén en el pedido.
+EN LAS NOTAS
+- En DATOS QUE FALTAN, indica qué cifra o dato haría el texto más útil
+  para un profesional.
+""",
+    "Divulgación": """AUDIENCIA: DIVULGACIÓN
+QUIÉN LEE
+- Personas curiosas sin formación previa en el tema, con ganas de
+  entender cómo funciona algo.
+QUÉ BUSCA
+- Entender una idea de verdad, no solo saber que existe.
+REGISTRO Y TRATO
+- Cercano y riguroso a la vez. Despierta curiosidad sin exagerar.
+FRASES Y VOCABULARIO
+- Ve de lo simple a lo complejo. Primero la idea central en una frase,
+  después el cómo y el porqué.
+- Usa como mucho una comparación cotidiana y di dónde deja de funcionar
+  si puede llevar a error.
+- Explica cada término técnico la primera vez que aparece.
+EMOJIS Y HASHTAGS
+- Sigue lo que indica la plataforma, con moderación.
+EVITA
+- Simplificar tanto que la explicación quede falsa.
+- Titulares sensacionalistas ("lo que nadie te cuenta", "cambiará todo").
+- Presentar como seguro algo que el pedido presenta como posible.
+EN LAS NOTAS
+- En A VERIFICAR, indica la comparación que usaste y en qué punto se
+  queda corta.
+""",
+    "Institucional": """AUDIENCIA: INSTITUCIONAL
+QUIÉN LEE
+- Ciudadanía, socios, prensa y otras instituciones. El texto habla en
+  nombre de una organización y la representa.
+QUÉ BUSCA
+- Información fiable y clara sobre lo que la organización hace, anuncia
+  o decide.
+REGISTRO Y TRATO
+- Formal, sobrio y preciso. La organización habla en primera persona
+  del plural ("hemos", "ofrecemos").
+FRASES Y VOCABULARIO
+- Frases completas y bien construidas, de 15 a 25 palabras como
+  referencia.
+- Lenguaje claro antes que lenguaje administrativo ("empieza" antes que
+  "da comienzo", "por eso" antes que "es por ello que").
+- Nombra cargos, programas y organismos tal como vienen en el pedido.
+EMOJIS Y HASHTAGS
+- Sin emojis, aunque la plataforma los permita. Como máximo un hashtag
+  oficial, solo si viene en el pedido.
+EVITA
+- Coloquialismos, humor e ironía.
+- Citas bibliográficas, estadísticas, datos científicos o declaraciones
+  de personas que no estén en el pedido.
+- Opinar sobre otras instituciones o sobre temas políticos.
+EN LAS NOTAS
+- En A VERIFICAR, indica nombres propios, cargos y fechas para que alguien
+  los compruebe antes de publicar.
+""",
+}
+
+BUSCADORES = """OPTIMIZACIÓN PARA BUSCADORES
+QUÉ HACER
+- Elige una palabra clave principal y una o dos variantes que diría una
+  persona al buscar el tema.
+- Pon la palabra clave en el título y en la primera frase, de forma
+  natural.
+- Responde a la pregunta principal en el primer párrafo.
+- Si es un blog, usa subtítulos que respondan a preguntas concretas.
+- Si la plataforma no es un blog, aplica solo lo que encaje y prioriza
+  que el texto se lea bien.
+EVITA
+- Repetir la palabra clave de forma forzada o en listas.
+- Llenar el texto de frases que no aportan información.
+EN LAS NOTAS
+- En ENFOQUE, indica la palabra clave principal y las variantes que
+  elegiste.
+"""
