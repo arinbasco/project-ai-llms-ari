@@ -1,0 +1,96 @@
+Fecha: 2026-10-13 00:40
+Configuración: model_name=openai/gpt-oss-120b | temperature=0.7 | reasoning_effort=low | max_tokens=2000 | model_kwargs={'seed': 42}
+SISTEMA: 3146 caracteres
+Script: scripts/probar_verificador.py
+
+======================================================================
+CASO 1. Tostadero | Instagram | Vender
+Cliente: tostadero-ventura | Audiencia: Público general
+Pedido: Bolsa de café de Colombia recién tostado, 250 gramos, a 14 euros. Se compra en la cafetería.
+Intentos: 1 | Tokens de entrada: 1903 | Tokens de salida: 329
+Avisos del redactor: ninguno
+
+TEXTO
+Descubre el aroma intenso del café de Colombia recién tostado, en su presentación de 250 g.  
+
+Es un grano de origen único que tostamos en nuestro local, garantizando frescura en cada bolsa.  
+
+Imagina preparar tu taza matutina en casa y sentir el cuerpo del café, tan vivo como si estuvieras en nuestra barra.  
+
+Llévatelo por solo 14 €, disponible en la cafetería.  
+
+Pásate por Tostadero Ventura y llévate la bolsa hoy mismo.  
+
+#caféColombiano #recientetostado #caféenbolsa #TostaderoVentura #MadridCafé
+
+NOTAS
+DATOS QUE FALTAN: ninguno  
+A VERIFICAR: el término “recién tostado” puede requerir confirmación de que se usa en la comunicación del cliente.  
+ENFOQUE: He seguido la estructura AIDA‑C (Atención, Interés, Deseo, Acción, Cierre) destacando el origen y el proceso de tostado, mostrando el beneficio de disfrutarlo en casa y finalizando con la llamada a la acción “pásate”.
+
+CAPA 1: 1 problemas
+- [frase prohibida] El prompt pide evitar "único". | frase: único
+
+======================================================================
+CASO 2. Banco Faro | LinkedIn | Informar
+Cliente: banco-faro | Audiencia: Profesional
+Pedido: Banco Faro añade a la app una herramienta para apartar los gastos fijos del mes en un espacio separado de la cuenta. Disponible desde el 1 de noviembre de 2026 para todos los clientes.
+Intentos: 1 | Tokens de entrada: 2002 | Tokens de salida: 386
+Avisos del redactor: ninguno
+
+TEXTO
+Banco Faro incorpora a su app una herramienta para apartar los gastos fijos del mes en un espacio separado de la cuenta. La novedad está disponible desde el 1 de noviembre de 2026 para todos los clientes.
+
+Con esta funcionalidad, los usuarios pueden clasificar de forma automática los pagos recurrentes, como alquiler o suscripciones, y visualizarlos en una zona distinta del saldo principal.  
+
+El objetivo es facilitar la planificación financiera sin salir de la app, evitando que los gastos fijos se mezclen con el resto de las transacciones.  
+
+Al estar integrada en la misma plataforma, la herramienta no requiere pasos adicionales ni la instalación de módulos externos.  
+
+Los profesionales del sector pueden recomendar esta opción a sus clientes para mejorar la gestión del flujo de caja mensual y reducir la fricción en la revisión de gastos.  
+
+Para más información, acceda a la sección de novedades de la app Banco Faro.  
+
+#bancadigital #fintech #gestiónfinanciera
+
+NOTAS
+DATOS QUE FALTAN: Detalle de cómo se configura la herramienta dentro de la app y si existen límites de importe o número de gastos fijos que se pueden apartar.  
+A VERIFICAR: Fecha de disponibilidad (1 de noviembre 2026) y nombre del banco (Banco Faro).  
+ENFOQUE: He seguido la estructura de apertura con la noticia, he explicado el cómo y porqué, y he concluido con la acción recomendada para profesionales, manteniendo tono serio y directo.
+
+CAPA 1: 0 problemas
+- ninguno
+
+======================================================================
+CASO 3. Universidad Munin | Blog | Informar
+Cliente: universidad-munin | Audiencia: Divulgación
+Pedido: El grupo de Ecología Urbana de la Universidad Munin ha medido durante un año la temperatura en 40 calles de Madrid. En verano, las calles con árboles fueron de media 3 grados más frescas que las calles sin árboles. Los resultados se presentan en una conferencia abierta al público el 20 de noviembre de 2026 en el campus.
+Intentos: 1 | Tokens de entrada: 1996 | Tokens de salida: 752
+Avisos del redactor: ninguno
+
+TEXTO
+# Las calles con árboles son 3 °C más frescas en verano
+
+El grupo de Ecología Urbana de la Universidad Munin ha constatado que, durante el último verano, las calles de Madrid que contaban con arbolado fueron, en promedio, tres grados Celsius más frescas que las que no tenían árboles. Los resultados se presentarán en una conferencia abierta al público el 20 de noviembre de 2026 en el campus.
+
+## Cómo se llevó a cabo el estudio
+
+El equipo midió la temperatura en 40 calles distintas de la capital a lo largo de un año completo. Cada calle se clasificó según la presencia o ausencia de árboles y se registró la temperatura en los momentos de mayor calor. Los datos mostraron una diferencia constante de 3 °C entre ambas categorías. Esta diferencia se mantuvo en los meses de mayor radiación solar, cuando el efecto del arbolado es más evidente.
+
+## Por qué los árboles reducen la temperatura
+
+Los árboles actúan como reguladores térmicos mediante dos procesos principales. Primero, sus hojas interceptan la radiación solar, evitando que llegue directamente al pavimento. Segundo, la evaporación del agua a través de la transpiración absorbe calor del entorno. El conjunto de estos efectos crea una zona de sombra y humedad que baja la temperatura del aire circundante. En términos cotidianos, una calle arbolada se comporta como una “caja de hielo” comparada con una calle sin sombra, aunque la analogía deja de ser exacta porque el proceso de enfriamiento no es tan rápido ni uniforme como el de un congelador.
+
+## Qué implica para la planificación urbana
+
+El hallazgo confirma que el arbolado urbano puede ser una herramienta eficaz para mitigar el calor extremo en ciudades densamente construidas. Incorporar más árboles en proyectos de renovación de calles o en nuevos desarrollos podría reducir la necesidad de sistemas de refrigeración artificial y mejorar el confort de los peatones. La conferencia del 20 de noviembre ofrecerá detalles sobre la metodología, los resultados completos y posibles recomendaciones para autoridades municipales y ciudadanos interesados.
+
+Para quienes deseen profundizar en el estudio, la Universidad Munin publicará el informe completo en su página web a partir de la fecha de la conferencia.
+
+NOTAS
+**DATOS QUE FALTAN:** Fuente exacta de los datos (por ejemplo, si se utilizó algún sensor específico o entidad colaboradora). Información sobre la distribución exacta de las 40 calles (número con y sin árboles).  
+**A VERIFICAR:** Diferencia de 3 °C entre calles con y sin árboles; fecha de la conferencia (20 noviembre 2026); nombre del grupo (Ecología Urbana de la Universidad Munin).  
+**ENFOQUE:** He seguido la estructura solicitada iniciando con la noticia, explicando el cómo y el porqué, añadiendo contexto y detalles, y cerrando con información útil para ampliar el tema. La comparación cotidiana se usó en el tercer subtítulo y se indica su limitación en la nota.
+
+CAPA 1: 1 problemas
+- [notas] Las notas llevan asteriscos de negrita o cursiva y van en texto plano. | frase: **D
