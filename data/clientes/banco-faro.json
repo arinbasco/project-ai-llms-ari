@@ -1,0 +1,19 @@
+{
+  "id": "banco-faro",
+  "nombre": "Banco Faro",
+  "tipo": "empresa",
+  "sector": "banca digital",
+  "descripcion": "Banco que funciona solo desde su app, sin oficinas. Ofrece cuenta, tarjeta y herramientas para organizar gastos y ahorro.",
+  "voz": {
+    "tono": ["claro", "sereno", "didáctico"],
+    "trato": "usted",
+    "expresiones_propias": ["desde la app"],
+    "expresiones_vetadas": ["revolucionario", "dinero fácil", "garantizado"],
+    "emojis": "no"
+  },
+  "limites": [
+    "No prometer rentabilidades ni ganancias.",
+    "No dar consejo financiero personalizado.",
+    "No mencionar intereses, TAE ni comisiones si no vienen en el pedido."
+  ]
+}

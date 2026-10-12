@@ -1,0 +1,18 @@
+{
+  "id": "tostadero-ventura",
+  "nombre": "Tostadero Ventura",
+  "tipo": "empresa",
+  "sector": "cafetería y tostador de café",
+  "descripcion": "Cafetería de barrio en Madrid que tuesta su propio café en el mismo local. Vende café para tomar allí y en bolsa para llevar a casa, y organiza talleres y actividades. Es un negocio pequeño e independiente.",
+  "voz": {
+    "tono": ["cercano", "sencillo", "con oficio"],
+    "trato": "tu",
+    "expresiones_propias": ["recién tostado", "pásate"],
+    "expresiones_vetadas": ["experiencia única", "café de autor", "conquista"],
+    "emojis": "moderado"
+  },
+  "limites": [
+    "No presentar el café como saludable ni hablar de sus efectos en el cuerpo.",
+    "No compararse con otras cafeterías ni con cadenas."
+  ]
+}
