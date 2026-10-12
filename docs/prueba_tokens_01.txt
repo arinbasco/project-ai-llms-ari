@@ -1,0 +1,78 @@
+Medición de tokens | temperatura 0.7 | sin razonamiento | semilla 42 | techo 1000
+
+======================================================================
+1. Caso corto | X | Público general | Generar conversación | buscadores False
+caracteres sistema 2392 | caracteres pedido 2627
+tokens entrada 1404 | salida 248 | total 1652
+palabras del texto 65 | motivo de cierre stop | tiempo 1.6 s
+----------------------------------------------------------------------
+1/4
+Muchos de nosotros tomamos café a diario, pero pocos sabemos de dónde viene exactamente.
+
+2/4
+La cafetería Tostadero Ventura, en Madrid, ha lanzado un café de especialidad de Colombia.
+
+3/4
+Este origen le da un perfil de sabor muy particular que cambia la experiencia de la taza.
+
+4/4
+¿Qué es lo primero que buscabais en una cafetería cuando queríais probar algo nuevo? #CaféDeEspecialidad #Madrid
+
+NOTAS PARA REVISAR
+DATOS QUE FALTAN: ninguno
+A VERIFICAR: El término "café de especialidad" puede no ser conocido por toda la audiencia general; se asume que el contexto lo aclara, pero conviene vigilar si genera confusión.
+ENFOQUE: Se ha aplicado la estructura de situación reconocible (tomar café a diario), dato concreto (lanzamiento en Madrid) y pregunta abierta al final. La pregunta busca que el usuario recuerde una anécdota o criterio personal sobre cómo descubre nuevas bebidas, fomentando una respuesta descriptiva en lugar de una simple opinión positiva o negativa.
+
+======================================================================
+2. Caso largo | Blog | Institucional | Convocar | buscadores True
+caracteres sistema 2392 | caracteres pedido 3730
+tokens entrada 1721 | salida 502 | total 2223
+palabras del texto 252 | motivo de cierre stop | tiempo 1.4 s
+----------------------------------------------------------------------
+# Jornada de puertas abiertas del Grado en Periodismo en la Universidad del Prado
+
+La Universidad del Prado organiza una jornada de puertas abiertas para dar a conocer el Grado en Periodismo. Este evento está dirigido a estudiantes y profesionales interesados en el ámbito de la comunicación.
+
+## ¿Qué es la jornada de puertas abiertas?
+
+Se trata de una sesión informativa específica sobre el grado. El objetivo es ofrecer una visión clara de la formación, los contenidos y las oportunidades que proporciona el programa. Es una oportunidad para resolver dudas directas sobre la carrera y entender cómo se estructura la experiencia académica.
+
+## ¿Por qué conviene asistir a la jornada?
+
+Participar permite conocer de cerca la propuesta educativa de la institución. Los asistentes podrán interactuar con el equipo académico y comprender las dinámicas de aprendizaje. Esta interacción directa facilita la toma de decisiones informadas sobre la formación universitaria en periodismo.
+
+## Datos prácticos
+
+*   **Fecha:** sábado 14 de noviembre de 2026
+*   **Horario:** de 10:00 a 14:00
+*   **Lugar:** Campus de Moncloa
+
+## Cómo inscribirse en la jornada
+
+La inscripción es gratuita y se realiza exclusivamente a través de la web de la universidad. Las solicitudes deben formalizarse antes del 10 de noviembre. Es importante reservar el cupo con antelación para garantizar la participación.
+
+Invitamos a guardar en el calendario el día 14 de noviembre para no perder esta oportunidad de conocer el Grado en Periodismo. La inscripción permanece abierta hasta el 10 de noviembre en la plataforma digital de la institución.
+
+NOTAS PARA REVISAR
+DATOS QUE FALTAN: ninguno
+A VERIFICAR: Comprobar que el 14 de noviembre de 2026 cae efectivamente en sábado. Verificar la denominación exacta del campus ("Campus de Moncloa") y la disponibilidad del enlace a la web de inscripción si se incluye en la publicación final.
+ENFOQUE: Se utilizó "jornada de puertas abiertas grado en periodismo" como palabra clave principal y "Universidad del Prado" como variante. El texto sigue la estructura de convocatoria: define el evento, explica su valor, agrupa los datos prácticos en una sección final como exige el formato de blog y detalla el proceso de inscripción para facilitar la acción del usuario.
+
+======================================================================
+3. Caso con ajuste infantil | Instagram | Infantil | Vender | buscadores False
+caracteres sistema 2392 | caracteres pedido 3701
+tokens entrada 1700 | salida 112 | total 1812
+palabras del texto 67 | motivo de cierre stop | tiempo 0.6 s
+----------------------------------------------------------------------
+El sábado por la tarde, los churros se acompañan de chocolate.
+
+En Tostadero Ventura, los niños y niñas de 8 a 12 años prueban esta merienda especial.
+
+Por solo 3 euros, disfrutan de un momento dulce después del cole o del parque.
+
+Es una forma sencilla de compartir un rato de diversión y relax.
+
+Pásate a Tostadero Ventura este fin de semana.
+
+#churros #merienda #cafetería #familia #sábados
+

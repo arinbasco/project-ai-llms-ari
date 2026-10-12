@@ -1,0 +1,91 @@
+Comparación de modelo | openai/gpt-oss-120b | razonamiento low | temperatura 0.7 | semilla 42 | techo 1000
+
+======================================================================
+1. Hilo narrativo de cafetería | X | Público general | Contar una historia | buscadores False
+caracteres sistema 2707 | caracteres pedido 3207
+tokens entrada 1639 | salida 889 | total 2528
+palabras del texto 114 | notas True | motivo de cierre stop | tiempo 4.3 s
+----------------------------------------------------------------------
+**1/4** Lucía, la tostadora de Tostadero Ventura, está de pie entre los cafetales de La Esperanza, Huila, con la mano sobre una bolsa de granos recién cosechados.  
+
+**2/4** Al probar doce muestras, duda cuál llevará la esencia de la finca a Madrid; la decisión pesa porque cada lote tiene notas distintas.  
+
+**3/4** Tras elegir el lote con aromas de panela, mandarina y cacao, Lucía vuelve a Chamberí y lo tuesta para que llegue a vuestra taza de filtro.  
+
+**4/4** Desde el 20 de octubre podéis probar este café de origen en Tostadero Ventura. Venid de lunes a sábado, de 8 a 20 h, y descubrid el sabor de Huila. ☕ #CaféDeEspecialidad #Madrid  
+
+---  
+**NOTAS PARA REVISAR**  
+
+**DATOS QUE FALTAN:** ninguno.  
+
+**A VERIFICAR:**  
+- “panela” (tipo de azúcar no refinada).  
+- “café de filtro” (método de preparación).  
+- “tostadora” (persona que tuesta café).  
+
+**ENFOQUE:** He seguido la estructura solicitada (situación, conflicto, desarrollo, resolución) distribuyéndola en cuatro posts, con el primero autónomo y el último con la llamada a la acción y los hashtags.
+
+======================================================================
+2. Jornada de puertas abiertas | Blog | Institucional | Convocar | buscadores True
+caracteres sistema 2707 | caracteres pedido 3899
+tokens entrada 1810 | salida 687 | total 2497
+palabras del texto 285 | notas True | motivo de cierre stop | tiempo 1.9 s
+----------------------------------------------------------------------
+# Jornada de puertas abiertas del Grado en Periodismo
+
+La Universidad del Prado abre sus puertas el sábado 14 de noviembre de 2026 para que estudiantes de bachillerato y sus familias conozcan el Grado en Periodismo. Os invitamos a descubrir la Facultad de Comunicación del campus de Moncloa y a participar en las actividades programadas.
+
+## ¿Qué ofrece la jornada?
+
+Comenzaremos a las 10:00 con la bienvenida de la decana, Marta Ibáñez, quien presentará los objetivos del grado. A las 10:30 se realizará una charla sobre las prácticas en medios, donde se explicarán las oportunidades de inserción profesional. A las 11:30 ofreceremos una visita guiada al plató de televisión y a la radio de la facultad, para que podáis ver de cerca el entorno de trabajo. Finalmente, a las 12:30 los estudiantes de cuarto curso responderán a vuestras preguntas y compartirán su experiencia.
+
+## ¿Por qué asistir?
+
+Esta jornada permite a los futuros estudiantes y a sus familias obtener información fiable y directa sobre el plan de estudios, los recursos de la facultad y las posibilidades de desarrollo profesional. Además, la visita a los espacios de producción audiovisual muestra el equipamiento con el que trabajaréis durante el grado.
+
+## Datos prácticos
+
+- **Evento:** Jornada de puertas abiertas del Grado en Periodismo  
+- **Fecha:** sábado 14 de noviembre de 2026  
+- **Horario:** 10:00 – 14:00  
+- **Lugar:** Facultad de Comunicación, campus de Moncloa (accesible en silla de ruedas)  
+- **Participación:** gratuita, 120 plazas disponibles  
+- **Inscripción:** mediante la web de la Universidad, sección “Jornadas”, con plazo hasta el 10 de noviembre  
+
+Os animamos a reservar la fecha, inscribiros antes del 10 de noviembre y disfrutar de una jornada informativa que facilitará vuestra decisión académica.
+
+---
+
+**NOTAS PARA REVISAR**
+
+- **DATOS QUE FALTAN:** ninguno.  
+- **A VERIFICAR:** confirmar que Marta Ibáñez es la decana, que el día 14 de noviembre de 2026 es sábado, y que la inscripción está disponible en la sección “Jornadas” de la web.  
+- **ENFOQUE:** palabra clave principal “jornada de puertas abiertas del Grado en Periodismo”; variantes “evento periodismo Universidad del Prado” y “visita facultad comunicación”. La estructura sigue la guía de objetivo (qué, por qué, datos prácticos, cómo inscribirse) y se ha distribuido la información en subtítulos que responden a preguntas concretas.
+
+======================================================================
+3. Merienda infantil | Instagram | Infantil | Vender | buscadores False
+caracteres sistema 2707 | caracteres pedido 3649
+tokens entrada 1746 | salida 372 | total 2118
+palabras del texto 102 | notas True | motivo de cierre stop | tiempo 1.3 s
+----------------------------------------------------------------------
+¡Chocolate a la taza con churros, hecho con cacao de Ecuador, llega los sábados!  
+Una merienda perfecta para que los niños descubran el sabor del cacao auténtico y la textura crujiente de los churros.  
+
+A las 17:30 empieza un taller de dibujo gratuito, ideal para que vayan a casa con una obra propia y el recuerdo de una tarde dulce.  
+
+Imagina a tu hijo disfrutando del chocolate caliente mientras dibuja, como en una clase de arte pero con sabor a postre.  
+
+Pásate al Tostadero Ventura entre 17:00 y 19:00 los sábados de noviembre y vive la experiencia.  
+
+#ChocolateConChurros  
+#TallerDeDibujo  
+#MeriendaParaNiños  
+
+---  
+
+**NOTAS PARA REVISAR**  
+- **DATOS QUE FALTAN:** ninguno.  
+- **A VERIFICAR:** ninguna frase sugiere presión para comprar.  
+- **ENFOQUE:** He seguido la estructura A‑I‑D‑A, comenzando con el detalle distintivo (cacao de Ecuador), describiendo la merienda y el taller, mostrando la experiencia familiar y terminando con una llamada a la acción clara para los adultos.
+

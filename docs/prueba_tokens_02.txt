@@ -1,0 +1,73 @@
+Medición de tokens 02 | temperatura 0.7 | sin razonamiento | semilla 42 | techo 1000
+
+======================================================================
+1. Hilo narrativo de cafetería | X | Público general | Contar una historia | buscadores False
+caracteres sistema 2707 | caracteres pedido 3207
+tokens entrada 1657 | salida 92 | total 1749
+palabras del texto 48 | notas False | motivo de cierre stop | tiempo 1.1 s
+----------------------------------------------------------------------
+Lucía eligió este café entre 12 muestras en la finca La Esperanza, Huila.
+
+La familia Rojas cultiva en Colombia. Lucía viajó a marzo de 2026 para probar los lotes.
+
+Eligió el lavado. Notas de panela, mandarina y cacao.
+
+Disponible desde el 20 oct en Tostadero Ventura, Chamberí. #CaféDeEspecialidad
+
+======================================================================
+2. Jornada de puertas abiertas | Blog | Institucional | Convocar | buscadores True
+caracteres sistema 2707 | caracteres pedido 3899
+tokens entrada 1854 | salida 661 | total 2515
+palabras del texto 350 | notas True | motivo de cierre stop | tiempo 1.7 s
+----------------------------------------------------------------------
+# Jornada de puertas abiertas del Grado en Periodismo en la Universidad del Prado
+
+La Universidad del Prado organiza una jornada de puertas abiertas para el Grado en Periodismo, dirigida a estudiantes de bachillerato y a sus familias. Este evento permitirá conocer de cerca la oferta académica y las instalaciones de la Facultad de Comunicación.
+
+## Qué se puede ver en la jornada
+
+Durante la mañana, los asistentes participarán en diversas actividades orientadas a mostrar la realidad del periodismo. La jornada comienza con la bienvenida de la decana, Marta Ibáñez. A continuación, se celebrará una charla sobre las prácticas en medios, un aspecto clave para la formación profesional.
+
+Más tarde, los participantes realizarán una visita guiada al plató de televisión y a la emisora de radio de la facultad. Esta experiencia práctica permite visualizar el entorno de trabajo donde los futuros periodistas desarrollarán sus habilidades. El programa finaliza con un espacio de preguntas dirigido a estudiantes de cuarto curso, que compartirán su experiencia vivida durante la carrera.
+
+## Datos prácticos
+
+*   **Fecha:** Sábado 14 de noviembre de 2026
+*   **Horario:** De 10:00 a 14:00
+*   **Lugar:** Facultad de Comunicación, campus de Moncloa
+*   **Accesibilidad:** El edificio es accesible en silla de ruedas
+*   **Inscripción:** Gratuita
+
+La inscripción es gratuita y debe realizarse a través de la web de la universidad, en la sección Jornadas. El plazo para apuntarse permanece abierto hasta el 10 de noviembre. La capacidad del evento está limitada a 120 plazas.
+
+## Cómo inscribirse
+
+Para reservar una plaza, es necesario acceder a la página web oficial de la institución. En la sección dedicada a las Jornadas, encontrará el formulario de registro. Al completar los datos solicitados, la solicitud quedará registrada. Se recomienda realizar el trámite con antelación, dado que el cupo es fijo y no se aceptan inscripciones una vez finalizado el plazo establecido el 10 de noviembre.
+
+Aprovechemos esta oportunidad para acercar el mundo de la comunicación a las familias y a los jóvenes interesados en la profesión. Aseguren su plaza en la jornada de puertas abiertas y descubran cómo es estudiar Periodismo en nuestra universidad.
+
+NOTAS PARA REVISAR
+DATOS QUE FALTAN: ninguno
+A VERIFICAR: nombre y cargo de Marta Ibáñez; fecha exacta (sábado 14 de noviembre de 2026) y día de la semana; horario (10:00-14:00); lugar (Facultad de Comunicación, campus de Moncloa); límite de plazas (120); fecha límite de inscripción (10 de noviembre).
+ENFOQUE: La palabra clave principal es "jornada de puertas abiertas", con la variante "Grado en Periodismo". Se ha estructurado el texto para responder directamente a qué es, qué incluye y cómo inscribirse, utilizando subtítulos claros para facilitar la lectura y la indexación, manteniendo un tono institucional y sobrio.
+
+======================================================================
+3. Merienda infantil | Instagram | Infantil | Vender | buscadores False
+caracteres sistema 2707 | caracteres pedido 3649
+tokens entrada 1779 | salida 180 | total 1959
+palabras del texto 91 | notas False | motivo de cierre stop | tiempo 0.7 s
+----------------------------------------------------------------------
+Cacao de Ecuador y leche entera. Así nace el chocolate a la taza de Tostadero Ventura.
+
+Cada sábado, de 17:00 a 19:00, vuestros hijos y hijas de 8 a 12 años disfrutan de esta merienda.
+
+Por 3 euros, prueban churros con chocolate. También pueden elegirlo con bebida de avena.
+
+En noviembre, la tarde se alarga. De 17:30 a 18:30, hay un taller de dibujo gratuito.
+
+Es una forma de que aprendan a dibujar mientras descansan.
+
+Reservad su plaza para el próximo sábado en el tostadero.
+
+#tostadero #merienda #tallerdedibujo #chocolatetaza #churros #familia
+
