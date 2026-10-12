@@ -1,0 +1,124 @@
+Fecha: 2026-10-13 01:35
+Redactor: model_name=openai/gpt-oss-120b | temperature=0.7 | reasoning_effort=low | max_tokens=2000 | model_kwargs={'seed': 42}
+Revisor: model_name=qwen/qwen3.8-27b | temperature=1e-08 | reasoning_effort=none | max_tokens=1000 | model_kwargs={'seed': 42}
+SISTEMA: 3146 caracteres | REVISOR: 1333 caracteres
+Script: scripts/probar_verificador.py
+
+======================================================================
+CASO 1. Tostadero | Instagram | Vender
+Cliente: tostadero-ventura | Audiencia: Público general
+Pedido: Bolsa de café de Colombia recién tostado, 250 gramos, a 14 euros. Se compra en la cafetería.
+Intentos: 1 | Tokens de entrada: 2579 | Tokens de salida: 797 (redactor + revisor)
+Avisos: ninguno
+
+TEXTO
+Descubre el aroma de Colombia en cada sorbo: nuestro café recién tostado, 250 g, por 14 €.
+
+Es un grano 100 % colombiano, tostado al momento en nuestro local, lo que conserva sus notas intensas y equilibradas. Cada bolsa lleva el sabor auténtico de la finca a tu taza, ya sea en casa o en la barra.
+
+Imagina una mañana tranquila, una taza humeante y el aroma que llena la cocina mientras lees el periódico. Ese momento empieza con nuestro café recién tostado.
+
+Pásate por Tostadero Ventura, elige tu bolsa y llévatela a casa.
+
+#cafécolombiano #reciéntostado #caféteriaMadrid #caféenbolsa #tostadorlocal #tostaderoventura
+
+NOTAS
+DATOS QUE FALTAN: ninguno
+A VERIFICAR: ninguno
+ENFOQUE: Se siguió la estructura AIDA‑C (Atención con detalle del origen, Interés con características del tostado, Deseo con escena cotidiana, Acción con “pásate” y ubicación) manteniendo tono cercano y frases breves.
+
+CAPA 1: 0 problemas
+- ninguno
+
+CAPA 2: 7 problemas | descartados por el filtro: 0
+- [ADORNO] Descubre el aroma de Colombia en cada sorbo | El pedido solo indica que es café de Colombia recién tostado, sin mencionar aromas ni la experiencia del sorbo.
+- [AÑADE] Es un grano 100 % colombiano | El pedido especifica "café de Colombia", pero no afirma que sea un grano 100% colombiano (podría ser una mezcla).
+- [ADORNO] lo que conserva sus notas intensas y equilibradas | El texto añade características organolépticas (notas intensas y equilibradas) que no figuran en el pedido ni en la ficha.
+- [AÑADE] Cada bolsa lleva el sabor auténtico de la finca a tu taza | El texto atribuye al producto un origen específico ("de la finca") y una cualidad ("sabor auténtico") que no se mencionan en el pedido ni en la ficha.
+- [AÑADE] ya sea en casa o en la barra | El pedido indica que se compra en la cafetería para llevar a casa, pero no especifica que también se pueda consumir en la barra (aunque la ficha menciona venta para tomar allí, el pedido específico es para llevar).
+- [ADORNO] Imagina una mañana tranquila, una taza humeante y el aroma que llena la cocina mientras lees el periódico | Es una descripción de estilo y una escena imaginaria que no aporta datos comprobables ni están en el pedido.
+- [AÑADE] #cafécolombiano #reciéntostado #caféteriaMadrid #caféenbolsa #tostadorlocal #tostaderoventura | Los hashtags añaden etiquetas como "tostadorlocal" y "caféteriaMadrid" que, aunque coherentes con la ficha, son metadatos no solicitados en el pedido de la bolsa específica.
+
+======================================================================
+CASO 2. Banco Faro | LinkedIn | Informar
+Cliente: banco-faro | Audiencia: Profesional
+Pedido: Banco Faro añade a la app una herramienta para apartar los gastos fijos del mes en un espacio separado de la cuenta. Disponible desde el 1 de noviembre de 2026 para todos los clientes.
+Intentos: 1 | Tokens de entrada: 2711 | Tokens de salida: 717 (redactor + revisor)
+Avisos: ninguno
+
+TEXTO
+Banco Faro incorpora una nueva herramienta en su app para separar los gastos fijos mensuales en un espacio dedicado. La función está disponible para todos los clientes a partir del 1 de noviembre de 2026.  
+
+La herramienta permite clasificar de forma automática los pagos recurrentes, como alquiler, servicios o suscripciones, en una categoría independiente de la cuenta corriente.  
+
+Con este apartado, los usuarios pueden visualizar el importe total de sus compromisos fijos y planificar mejor su flujo de caja.  
+
+Al estar integrada en la misma plataforma, la gestión de los fondos se realiza sin necesidad de mover dinero entre cuentas ni crear subcuentas externas.  
+
+Para los profesionales de finanzas y gestión de gastos, la novedad facilita la elaboración de presupuestos mensuales y la identificación de oportunidades de ahorro dentro del entorno digital del banco.  
+
+La disponibilidad inmediata a todos los clientes garantiza una adopción rápida y una mayor consistencia en la información financiera que manejan.  
+
+#bancodigital #gestióndefinanzas #innovación
+
+NOTAS
+DATOS QUE FALTAN: Ninguno.  
+A VERIFICAR: Fecha de disponibilidad (1 de noviembre de 2026) y nombre del banco (Banco Faro).  
+ENFOQUE: He seguido la estructura de apertura con la noticia, he detallado el cómo funciona y su utilidad para profesionales, y he concluido con la disponibilidad y el alcance, manteniendo tono serio y directo.
+
+CAPA 1: 0 problemas
+- ninguno
+
+CAPA 2: 5 problemas | descartados por el filtro: 0
+- [AÑADE] La herramienta permite clasificar de forma automática los pagos recurrentes, como alquiler, servicios o suscripciones, en una categoría independiente de la cuenta corriente. | El pedido solo indica que la herramienta sirve para "apartar los gastos fijos", sin especificar que la clasificación sea automática ni mencionar ejemplos concretos como alquiler o suscripciones.
+- [AÑADE] Con este apartado, los usuarios pueden visualizar el importe total de sus compromisos fijos y planificar mejor su flujo de caja. | El pedido no menciona la visualización del importe total ni la planificación del flujo de caja como funciones de la herramienta.
+- [AÑADE] Al estar integrada en la misma plataforma, la gestión de los fondos se realiza sin necesidad de mover dinero entre cuentas ni crear subcuentas externas. | El pedido no especifica el mecanismo técnico de la herramienta ni afirma que no sea necesario mover dinero ni crear subcuentas externas.
+- [AÑADE] Para los profesionales de finanzas y gestión de gastos, la novedad facilita la elaboración de presupuestos mensuales y la identificación de oportunidades de ahorro dentro del entorno digital del banco. | El pedido no menciona a profesionales de finanzas como público objetivo ni afirma que la herramienta facilite la elaboración de presupuestos o la identificación de oportunidades de ahorro.
+- [AÑADE] La disponibilidad inmediata a todos los clientes garantiza una adopción rápida y una mayor consistencia en la información financiera que manejan. | El pedido indica la fecha de disponibilidad pero no afirma que esto garantice una adopción rápida ni una mayor consistencia en la información financiera.
+
+======================================================================
+CASO 3. Universidad Munin | Blog | Informar
+Cliente: universidad-munin | Audiencia: Divulgación
+Pedido: El grupo de Ecología Urbana de la Universidad Munin ha medido durante un año la temperatura en 40 calles de Madrid. En verano, las calles con árboles fueron de media 3 grados más frescas que las calles sin árboles. Los resultados se presentan en una conferencia abierta al público el 20 de noviembre de 2026 en el campus.
+Intentos: 1 | Tokens de entrada: 2993 | Tokens de salida: 1374 (redactor + revisor)
+Avisos: ninguno
+
+TEXTO
+# Las calles con árboles son 3 °C más frescas en verano
+
+El grupo de Ecología Urbana de la Universidad Munin ha medido la temperatura en 40 calles de Madrid durante un año y ha constatado que, en los meses de verano, las vías arboladas son en promedio 3 °C más frescas que las que no tienen árboles. La conferencia donde se presentarán los resultados será el 20 de noviembre de 2026 en el campus.
+
+## Cómo se realizó el estudio
+
+Durante doce meses se instalaron termómetros en 20 calles con presencia de árboles y en 20 sin ellos. Cada sensor registró la temperatura cada hora, lo que permitió comparar las medias diarias de ambas tipologías de calle. El método garantiza que las diferencias observadas no se deben a la hora del día ni a la ubicación geográfica dentro de la ciudad.
+
+## Por qué los árboles enfrían el entorno
+
+Los árboles reducen la temperatura mediante dos procesos: la sombra que bloquea la radiación solar directa y la evapotranspiración, que consiste en la liberación de vapor de agua desde las hojas. En una comparación cotidiana, es como abrir una ventana en una habitación caliente; la ventilación ayuda a bajar la temperatura, pero a diferencia de una ventana, los árboles continúan enfriando durante todo el día sin necesidad de energía externa. La analogía deja de ser válida cuando la densidad de árboles es insuficiente para crear sombra significativa, pues la reducción de calor depende de la cobertura vegetal.
+
+## Qué implica para la ciudad
+
+Una diferencia de 3 °C puede mejorar el confort térmico de los peatones y reducir la demanda de energía para climatizar edificios cercanos. Los datos también sirven para orientar políticas de planificación urbana que favorezcan la plantación de árboles en zonas vulnerables al calor. La comunidad universitaria y los ciudadanos podrán profundizar en los resultados y en las recomendaciones durante la conferencia anunciada.
+
+**Cierre**  
+Para conocer más detalles sobre la metodología y las propuestas de la Universidad Munin, visita la página del grupo de Ecología Urbana o acude a la conferencia del 20 de noviembre en el campus.
+
+NOTAS
+**DATOS QUE FALTAN:** Fuente exacta de los termómetros y la entidad que financió el estudio.  
+**A VERIFICAR:** Cifra de 3 °C de diferencia, fecha 20 noviembre 2026, nombre del grupo “Ecología Urbana”. Comparación con “abrir una ventana” y su límite de validez.  
+**ENFOQUE:** He seguido la estructura solicitada: apertura con la noticia, desarrollo del cómo y porqué, contexto y detalle, y cierre con información útil. Cada dato aparece en una frase independiente.
+
+CAPA 1: 1 problemas
+- [notas] Las notas llevan asteriscos de negrita o cursiva y van en texto plano. | frase: **D
+
+CAPA 2: 10 problemas | descartados por el filtro: 0
+- [AÑADE] Durante doce meses se instalaron termómetros en 20 calles con presencia de árboles y en 20 sin ellos. | El pedido indica que se midieron 40 calles, pero no especifica la distribución exacta (20 y 20) ni el método de instalación (termómetros).
+- [AÑADE] Cada sensor registró la temperatura cada hora, lo que permitió comparar las medias diarias de ambas tipologías de calle. | El pedido no menciona la frecuencia de registro (cada hora) ni el cálculo de medias diarias.
+- [AÑADE] El método garantiza que las diferencias observadas no se deben a la hora del día ni a la ubicación geográfica dentro de la ciudad. | El pedido no afirma que el método garantice la exclusión de variables como la hora o la ubicación geográfica.
+- [GENERAL] Los árboles reducen la temperatura mediante dos procesos: la sombra que bloquea la radiación solar directa y la evapotranspiración, que consiste en la liberación de vapor de agua desde las hojas. | Es una explicación científica general sobre cómo enfrían los árboles, no un dato del pedido ni de la ficha.
+- [ADORNO] En una comparación cotidiana, es como abrir una ventana en una habitación caliente; la ventilación ayuda a bajar la temperatura, pero a diferencia de una ventana, los árboles continúan enfriando durante todo el día sin necesidad de energía externa. | Es una analogía de estilo para explicar el concepto, sin aportar datos comprobables del cliente.
+- [GENERAL] La analogía deja de ser válida cuando la densidad de árboles es insuficiente para crear sombra significativa, pues la reducción de calor depende de la cobertura vegetal. | Es una aclaración teórica general sobre la eficacia de los árboles, no un dato del estudio específico.
+- [GENERAL] Una diferencia de 3 °C puede mejorar el confort térmico de los peatones y reducir la demanda de energía para climatizar edificios cercanos. | Son implicaciones generales de la diferencia de temperatura, no afirmaciones sobre lo que el cliente hace o ha medido.
+- [AÑADE] Los datos también sirven para orientar políticas de planificación urbana que favorezcan la plantación de árboles en zonas vulnerables al calor. | El pedido no indica que los datos sirvan para orientar políticas de planificación urbana ni que el grupo tenga ese objetivo.
+- [AÑADE] La comunidad universitaria y los ciudadanos podrán profundizar en los resultados y en las recomendaciones durante la conferencia anunciada. | El pedido dice que se presentan los resultados, pero no menciona que se presenten "recomendaciones" ni que se pueda "profundizar" en ellas.
+- [AÑADE] Para conocer más detalles sobre la metodología y las propuestas de la Universidad Munin, visita la página del grupo de Ecología Urbana o acude a la conferencia del 20 de noviembre en el campus. | El pedido no menciona la existencia de una página web del grupo ni de "propuestas" de la Universidad.

@@ -1,7 +1,8 @@
-"""Prueba real del redactor con ficha y de la capa 1 del verificador.
+"""Prueba real del redactor con ficha y de las dos capas del verificador.
 
-Hace una llamada a Groq por caso (dos si hay reintento) y guarda el
-resultado en docs/ con fecha, modelo y configuración en la cabecera.
+Por caso hace una llamada al redactor (dos si hay reintento) y una al
+revisor. Guarda el resultado en docs/ con fecha, modelos y configuración
+en la cabecera.
 """
 
 import sys
@@ -12,13 +13,12 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(RAIZ / "src"))
 
-from redaccion.clientes import cargar_cliente
-from redaccion.llm import obtener_llm
-from redaccion.prompts import SISTEMA
+from redaccion.llm import obtener_llm, obtener_revisor
+from redaccion.prompts import REVISOR, SISTEMA
 from redaccion.redactor import Pedido, redactar
-from redaccion.verificador import verificar_capa1
+from redaccion.verificador import TIPOS_CAPA2
 
-SALIDA = RAIZ / "docs" / "prueba_verificador_01.txt"
+SALIDA = RAIZ / "docs" / "prueba_verificador_02.txt"
 PAUSA_SEGUNDOS = 30
 
 CASOS = [
@@ -66,10 +66,12 @@ def main():
         sys.exit(f"{SALIDA.name} ya existe. Cambia SALIDA para no sobrescribirlo.")
 
     llm = obtener_llm()
+    revisor = obtener_revisor()
     lineas = [
         f"Fecha: {datetime.now():%Y-%m-%d %H:%M}",
-        f"Configuración: {configuracion(llm)}",
-        f"SISTEMA: {len(SISTEMA)} caracteres",
+        f"Redactor: {configuracion(llm)}",
+        f"Revisor: {configuracion(revisor)}",
+        f"SISTEMA: {len(SISTEMA)} caracteres | REVISOR: {len(REVISOR)} caracteres",
         f"Script: scripts/{Path(__file__).name}",
         "",
     ]
@@ -80,9 +82,9 @@ def main():
             time.sleep(PAUSA_SEGUNDOS)
         print(f"Caso {numero}: {nombre}")
 
-        resultado = redactar(pedido, llm)
-        cliente = cargar_cliente(pedido.cliente)
-        problemas = verificar_capa1(resultado.texto, resultado.notas, pedido, cliente)
+        resultado = redactar(pedido, llm, revisor=revisor)
+        capa1 = [p for p in resultado.problemas if p.regla not in TIPOS_CAPA2]
+        capa2 = [p for p in resultado.problemas if p.regla in TIPOS_CAPA2]
 
         lineas += [
             "=" * 70,
@@ -90,8 +92,9 @@ def main():
             f"Cliente: {pedido.cliente} | Audiencia: {pedido.audiencia}",
             f"Pedido: {pedido.tema}",
             (f"Intentos: {resultado.intentos} | Tokens de entrada: "
-             f"{resultado.tokens_entrada} | Tokens de salida: {resultado.tokens_salida}"),
-            f"Avisos del redactor: {resultado.avisos or 'ninguno'}",
+             f"{resultado.tokens_entrada} | Tokens de salida: {resultado.tokens_salida} "
+             "(redactor + revisor)"),
+            f"Avisos: {resultado.avisos or 'ninguno'}",
             "",
             "TEXTO",
             resultado.texto,
@@ -99,10 +102,17 @@ def main():
             "NOTAS",
             resultado.notas or "(sin notas)",
             "",
-            f"CAPA 1: {len(problemas)} problemas",
+            f"CAPA 1: {len(capa1)} problemas",
         ]
         lineas += [f"- [{p.regla}] {p.motivo} | frase: {p.frase}"
-                   for p in problemas] or ["- ninguno"]
+                   for p in capa1] or ["- ninguno"]
+        lineas += [
+            "",
+            f"CAPA 2: {len(capa2)} problemas | descartados por el filtro: "
+            f"{resultado.descartados}",
+        ]
+        lineas += [f"- [{p.regla}] {p.frase} | {p.motivo}"
+                   for p in capa2] or ["- ninguno"]
         lineas.append("")
 
         SALIDA.write_text("\n".join(lineas), encoding="utf-8")
