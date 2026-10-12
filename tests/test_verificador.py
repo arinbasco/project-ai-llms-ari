@@ -5,6 +5,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
+from langchain_core.language_models.fake_chat_models import FakeListChatModel
+
 from redaccion.clientes import cargar_cliente
 from redaccion.redactor import Pedido
 from redaccion.verificador import (
@@ -18,6 +20,7 @@ from redaccion.verificador import (
     revisar_vetadas,
     revisar_x,
     verificar_capa1,
+    verificar_capa2,
 )
 
 NOTAS_COMPLETAS = "DATOS QUE FALTAN: ninguno\nA VERIFICAR: ninguna\nENFOQUE: directo."
@@ -203,3 +206,60 @@ def test_verificar_capa1_junta_las_reglas():
     problemas = verificar_capa1("Café **garantizado** ☕", NOTAS_COMPLETAS, pedido, cliente)
     reglas = {problema.regla for problema in problemas}
     assert {"expresión vetada", "markdown", "emojis", "hashtags"} <= reglas
+
+# Capa 2
+
+TEXTO_BLOG = "La Universidad Munin publicará el informe completo. Un aroma intenso."
+PEDIDO_UNI = Pedido("estudio sobre árboles y temperatura", "Blog", "Divulgación",
+                    "Informar", "universidad-munin")
+CLIENTE_UNI = cargar_cliente("universidad-munin")
+
+
+def revisar_con(respuesta, texto=TEXTO_BLOG):
+    """Pasa el texto por la capa 2 con un revisor falso que da esta respuesta."""
+    llm = FakeListChatModel(responses=[respuesta])
+    return verificar_capa2(texto, PEDIDO_UNI, CLIENTE_UNI, llm)
+
+
+def test_capa2_ninguno():
+    revision = revisar_con("NINGUNO")
+    assert revision.problemas == []
+    assert revision.descartados == 0
+
+
+def test_capa2_lee_dos_bloques():
+    respuesta = ("FRASE: la Universidad Munin publicará el informe completo\n"
+                 "TIPO: AÑADE\n"
+                 "MOTIVO: el pedido no menciona ningún informe\n\n"
+                 "FRASE: aroma intenso\n"
+                 "TIPO: ADORNO\n"
+                 "MOTIVO: adjetivo sin dato")
+    revision = revisar_con(respuesta)
+    assert [p.regla for p in revision.problemas] == ["AÑADE", "ADORNO"]
+    assert revision.descartados == 0
+
+
+def test_capa2_descarta_citas_falsas():
+    revision = revisar_con("FRASE: el informe se publicó ayer\nTIPO: CONTRADICE\nMOTIVO: x")
+    assert revision.problemas == []
+    assert revision.descartados == 1
+
+
+def test_capa2_acepta_mayusculas_y_espacios():
+    revision = revisar_con(
+        "FRASE: la universidad munin publicará   el informe completo\nTIPO: AÑADE\nMOTIVO: x"
+    )
+    assert len(revision.problemas) == 1
+
+
+def test_capa2_descarta_bloques_mal_formados():
+    respuesta = ("FRASE: aroma intenso\nMOTIVO: falta el tipo\n\n"
+                 "FRASE: aroma intenso\nTIPO: OPINION\nMOTIVO: tipo inventado")
+    revision = revisar_con(respuesta)
+    assert revision.problemas == []
+    assert revision.descartados == 2
+
+
+def test_capa2_tolera_negritas():
+    revision = revisar_con("**FRASE:** aroma intenso\n**TIPO:** ADORNO\n**MOTIVO:** adjetivo")
+    assert len(revision.problemas) == 1

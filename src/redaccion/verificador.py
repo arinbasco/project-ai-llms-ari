@@ -1,7 +1,8 @@
 """Verificador del texto generado.
 
 Capa 1: reglas que se comprueban con código, sin llamar al modelo.
-Capa 2 (pendiente): revisión con un segundo modelo.
+Capa 2: revisión con un segundo modelo, que señala lo que el texto dice
+más allá del pedido y la ficha.
 
 Varias listas de este archivo copian reglas de prompts.py. Si cambian
 allí, hay que cambiarlas aquí.
@@ -9,6 +10,11 @@ allí, hay que cambiarlas aquí.
 
 import re
 from dataclasses import dataclass
+
+from langchain_core.messages import HumanMessage, SystemMessage
+
+from redaccion.llm import obtener_revisor
+from redaccion.prompts import REVISOR, REVISOR_USUARIO
 
 
 @dataclass
@@ -297,3 +303,85 @@ def verificar_capa1(texto, notas, pedido, cliente):
     problemas += revisar_trato(texto, cliente.voz.trato, pedido.audiencia)
     problemas += revisar_notas(notas)
     return problemas
+
+    # --- Capa 2. Revisión con un segundo modelo ---
+
+TIPOS_CAPA2 = ("CONTRADICE", "AÑADE", "GENERAL", "ADORNO")
+CAMPO = re.compile(r"^\s*[-•]?\s*(FRASE|TIPO|MOTIVO)\s*:\s*(.*)$", re.IGNORECASE)
+SEPARADOR_BLOQUES = re.compile(r"\n\s*\n")
+COMILLAS = str.maketrans({"“": '"', "”": '"', "«": '"', "»": '"', "‘": "'", "’": "'"})
+
+
+@dataclass
+class Revision:
+    """Lo que devuelve la capa 2."""
+
+    problemas: list
+    descartados: int = 0
+    tokens_entrada: int = 0
+    tokens_salida: int = 0
+
+
+def armar_mensajes_revisor(texto, pedido, cliente):
+    """Mensaje de sistema y de usuario para el revisor."""
+    usuario = REVISOR_USUARIO.format(
+        nombre=cliente.nombre,
+        descripcion=cliente.descripcion or "sin indicar",
+        tema=pedido.tema.strip(),
+        texto=texto,
+    )
+    return [SystemMessage(content=REVISOR), HumanMessage(content=usuario)]
+
+
+def leer_revision(contenido):
+    """Convierte la respuesta del revisor en problemas.
+
+    Devuelve los problemas y cuántos bloques venían mal formados.
+    """
+    if contenido.strip().strip(".").upper() == "NINGUNO":
+        return [], 0
+
+    problemas, mal_formados = [], 0
+    for bloque in SEPARADOR_BLOQUES.split(contenido.strip()):
+        campos = {}
+        for linea in bloque.replace("*", "").splitlines():
+            encontrado = CAMPO.match(linea)
+            if encontrado:
+                campos[encontrado.group(1).upper()] = encontrado.group(2).strip()
+
+        tipo = campos.get("TIPO", "").upper().strip(" .")
+        frase = campos.get("FRASE", "").strip().strip('"“”«»')
+        if not frase or tipo not in TIPOS_CAPA2:
+            mal_formados += 1
+            continue
+        problemas.append(Problema(regla=tipo, motivo=campos.get("MOTIVO", ""),
+                                  frase=frase))
+    return problemas, mal_formados
+
+
+def normalizar(texto):
+    """Minúsculas, comillas unificadas y espacios unificados."""
+    return re.sub(r"\s+", " ", texto.translate(COMILLAS)).strip().lower()
+
+
+def filtrar_citas(problemas, texto):
+    """Se queda solo con los problemas cuya frase está de verdad en el texto."""
+    texto_normal = normalizar(texto)
+    validos = [p for p in problemas if normalizar(p.frase) in texto_normal]
+    return validos, len(problemas) - len(validos)
+
+
+def verificar_capa2(texto, pedido, cliente, llm=None):
+    """Pide al revisor que señale lo que el texto dice más allá del pedido y la ficha."""
+    llm = llm or obtener_revisor()
+    respuesta = llm.invoke(armar_mensajes_revisor(texto, pedido, cliente))
+    uso = respuesta.usage_metadata or {}
+
+    problemas, mal_formados = leer_revision(respuesta.content)
+    validos, citas_falsas = filtrar_citas(problemas, texto)
+    return Revision(
+        problemas=validos,
+        descartados=mal_formados + citas_falsas,
+        tokens_entrada=uso.get("input_tokens", 0),
+        tokens_salida=uso.get("output_tokens", 0),
+    )
