@@ -1,0 +1,19 @@
+{
+  "id": "universidad-munin",
+  "nombre": "Universidad Munin",
+  "tipo": "empresa",
+  "sector": "educación superior",
+  "descripcion": "Universidad con campus en Madrid. Ofrece grados y másteres en ciencias, ingeniería y humanidades, y organiza actividades abiertas al público, como jornadas de puertas abiertas y conferencias.",
+  "voz": {
+    "tono": ["rigurosa", "acogedora", "clara"],
+    "trato": "tu",
+    "expresiones_propias": ["comunidad universitaria"],
+    "expresiones_vetadas": ["excelencia", "líder", "de referencia"],
+    "emojis": "moderado"
+  },
+  "limites": [
+    "No publicar cifras de empleabilidad, rankings ni premios que no vengan en el pedido.",
+    "No prometer salidas laborales.",
+    "No opinar sobre otras universidades ni sobre política universitaria."
+  ]
+}

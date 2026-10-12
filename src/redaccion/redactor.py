@@ -1,8 +1,9 @@
 """El redactor general.
 
-Arma el pedido con los bloques de prompts.py, llama al modelo, separa el
-texto de las notas y revisa que la respuesta esté completa. Si falta algo,
-repite la llamada una vez y, si sigue mal, entrega lo que hay con un aviso.
+Arma el pedido con los bloques de prompts.py y la ficha del cliente, llama
+al modelo, separa el texto de las notas y revisa que la respuesta esté
+completa. Si falta algo, repite la llamada una vez y, si sigue mal, entrega
+lo que hay con un aviso.
 """
 
 import re
@@ -10,11 +11,13 @@ from dataclasses import dataclass, field
 
 from langchain_core.messages import HumanMessage, SystemMessage
 
+from redaccion.clientes import cargar_cliente
 from redaccion.llm import obtener_llm
 from redaccion.prompts import (
     AJUSTES_INFANTIL,
     AUDIENCIAS,
     BUSCADORES,
+    FICHA,
     OBJETIVOS,
     OBJETIVOS_PLATAFORMA,
     PLATAFORMAS,
@@ -25,6 +28,9 @@ from redaccion.prompts import (
 MAX_INTENTOS = 2
 MARCA_NOTAS = re.compile(r"\**\s*NOTAS PARA REVISAR\s*\**", re.IGNORECASE)
 SEPARADOR_FINAL = re.compile(r"\n\s*-{3,}\s*$")
+TRATO_TEXTO = {"tu": "tú y vosotros", "usted": "usted y ustedes"}
+EMOJIS_TEXTO = {"no": "no usa emojis", "moderado": "con moderación",
+                "libre": "los usa con libertad"}
 
 
 @dataclass
@@ -35,6 +41,7 @@ class Pedido:
     plataforma: str
     audiencia: str
     objetivo: str
+    cliente: str
     buscadores: bool = False
 
     def validar(self):
@@ -47,6 +54,7 @@ class Pedido:
             raise ValueError(f"Audiencia desconocida: {self.audiencia}")
         if self.objetivo not in OBJETIVOS:
             raise ValueError(f"Objetivo desconocido: {self.objetivo}")
+        cargar_cliente(self.cliente)
 
 
 @dataclass
@@ -61,8 +69,29 @@ class Resultado:
     intentos: int = 0
 
 
+def armar_ficha(cliente):
+    """Convierte la ficha del cliente en el bloque de texto del prompt."""
+    def lista(elementos, vacio):
+        return ", ".join(f'"{e}"' for e in elementos) if elementos else vacio
+
+    limites = "\n".join(f"- {limite}" for limite in cliente.limites)
+    return FICHA.format(
+        nombre=cliente.nombre,
+        tipo=cliente.tipo or "sin indicar",
+        sector=cliente.sector or "sin indicar",
+        descripcion=cliente.descripcion or "sin indicar",
+        tono=", ".join(cliente.voz.tono) or "sin indicar",
+        trato=TRATO_TEXTO[cliente.voz.trato],
+        emojis=EMOJIS_TEXTO.get(cliente.voz.emojis, "sin indicar"),
+        expresiones_propias=lista(cliente.voz.expresiones_propias, "ninguna"),
+        expresiones_vetadas=lista(cliente.voz.expresiones_vetadas, "ninguna"),
+        limites=limites or "- ninguno",
+    )
+
+
 def armar_mensajes(pedido):
     """Devuelve el mensaje de sistema y el de usuario para este pedido."""
+    cliente = cargar_cliente(pedido.cliente)
     extras = []
     if pedido.audiencia == "Infantil" and pedido.objetivo in AJUSTES_INFANTIL:
         extras.append(AJUSTES_INFANTIL[pedido.objetivo])
@@ -70,6 +99,7 @@ def armar_mensajes(pedido):
         extras.append(BUSCADORES)
 
     usuario = USUARIO.format(
+        ficha=armar_ficha(cliente),
         tema=pedido.tema.strip(),
         plataforma=PLATAFORMAS[pedido.plataforma],
         audiencia=AUDIENCIAS[pedido.audiencia],
