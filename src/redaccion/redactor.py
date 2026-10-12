@@ -3,7 +3,8 @@
 Arma el pedido con los bloques de prompts.py y la ficha del cliente, llama
 al modelo, separa el texto de las notas y revisa que la respuesta esté
 completa. Si falta algo, repite la llamada una vez y, si sigue mal, entrega
-lo que hay con un aviso.
+lo que hay con un aviso. Al final pasa el texto por las dos capas del
+verificador.
 """
 
 import re
@@ -24,6 +25,7 @@ from redaccion.prompts import (
     SISTEMA,
     USUARIO,
 )
+from redaccion.verificador import verificar_capa1, verificar_capa2
 
 MAX_INTENTOS = 2
 MARCA_NOTAS = re.compile(r"\**\s*NOTAS PARA REVISAR\s*\**", re.IGNORECASE)
@@ -64,6 +66,8 @@ class Resultado:
     texto: str = ""
     notas: str | None = None
     avisos: list[str] = field(default_factory=list)
+    problemas: list = field(default_factory=list)
+    descartados: int = 0
     tokens_entrada: int = 0
     tokens_salida: int = 0
     intentos: int = 0
@@ -118,8 +122,27 @@ def separar(contenido):
     return texto, notas or None
 
 
-def redactar(pedido, llm=None):
-    """Redacta el pedido y devuelve un Resultado con texto, notas y avisos."""
+def verificar(resultado, pedido, revisor=None):
+    """Pasa el texto por las dos capas y añade lo encontrado al resultado."""
+    cliente = cargar_cliente(pedido.cliente)
+    resultado.problemas += verificar_capa1(resultado.texto, resultado.notas,
+                                           pedido, cliente)
+    try:
+        revision = verificar_capa2(resultado.texto, pedido, cliente, revisor)
+    except Exception as error:
+        resultado.avisos.append(
+            f"No se pudo hacer la revisión de la capa 2 ({type(error).__name__}). "
+            "Revisa los datos del texto a mano."
+        )
+        return
+    resultado.problemas += revision.problemas
+    resultado.descartados = revision.descartados
+    resultado.tokens_entrada += revision.tokens_entrada
+    resultado.tokens_salida += revision.tokens_salida
+
+
+def redactar(pedido, llm=None, verificar_texto=True, revisor=None):
+    """Redacta el pedido y devuelve un Resultado con texto, notas, avisos y problemas."""
     pedido.validar()
     llm = llm or obtener_llm()
     mensajes = armar_mensajes(pedido)
@@ -147,4 +170,7 @@ def redactar(pedido, llm=None):
         resultado.avisos.append(
             "El modelo no escribió las notas para revisar. Comprueba datos y afirmaciones a mano."
         )
+
+    if verificar_texto:
+        verificar(resultado, pedido, revisor)
     return resultado
