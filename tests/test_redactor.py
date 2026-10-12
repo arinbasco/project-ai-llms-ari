@@ -8,7 +8,9 @@ from langchain_core.language_models.fake_chat_models import FakeListChatModel
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from redaccion.redactor import Pedido, armar_mensajes, redactar, separar
+from redaccion.clientes import Cliente, Voz 
+from redaccion.prompts import SISTEMA  
+from redaccion.redactor import Pedido, armar_ficha, armar_mensajes, redactar, separar  
 
 CON_NOTAS = "Texto del post\n\n---\n**NOTAS PARA REVISAR**\nDATOS QUE FALTAN: ninguno"
 SIN_NOTAS = "Texto del post sin notas"
@@ -17,7 +19,7 @@ SIN_NOTAS = "Texto del post sin notas"
 def pedido_valido(**cambios):
     datos = {"tema": "café de Colombia", "plataforma": "X",
              "audiencia": "Infantil", "objetivo": "Vender",
-             "cliente": "tostadero-ventura"}  # NUEVO
+             "cliente": "tostadero-ventura"}
     datos.update(cambios)
     return Pedido(**datos)
 
@@ -39,6 +41,31 @@ def test_ajuste_infantil_y_buscadores_entran_en_el_pedido():
     assert "café de Colombia" in usuario
     assert "AJUSTE: INFANTIL Y VENDER" in usuario
     assert "OPTIMIZACIÓN PARA BUSCADORES" in usuario
+
+
+def test_la_ficha_entra_en_el_pedido():  
+    usuario = armar_mensajes(pedido_valido(cliente="banco-faro"))[1].content
+    assert usuario.startswith("FICHA DEL CLIENTE")
+    assert "Nombre: Banco Faro" in usuario
+    assert "Trato: usted y ustedes" in usuario
+
+
+def test_ficha_con_campos_vacios_escribe_ninguna():  
+    voz = Voz(tono=[], trato="tu", expresiones_propias=[],
+              expresiones_vetadas=[], emojis="")
+    cliente = Cliente(id="prueba", nombre="Prueba", tipo="", sector="",
+                      descripcion="", voz=voz, limites=[])
+    ficha = armar_ficha(cliente)
+    assert "Expresiones propias: ninguna" in ficha
+    assert "Expresiones que no se usan nunca: ninguna" in ficha
+    assert "Tipo: sin indicar" in ficha
+    assert "Emojis: sin indicar" in ficha
+    assert "LÍMITES\n- ninguno" in ficha
+
+
+def test_sistema_no_tiene_codigo_suelto():  
+    assert " = {" not in SISTEMA
+    assert " = (" not in SISTEMA
 
 
 def test_redactar_con_notas_hace_un_solo_intento():
@@ -67,7 +94,7 @@ def test_redactar_avisa_si_las_notas_faltan_dos_veces():
     {"plataforma": "TikTok"},
     {"audiencia": "Jubilados"},
     {"objetivo": "Entretener"},
-    {"cliente": "no-existe"},  # NUEVO
+    {"cliente": "no-existe"},
 ])
 def test_pedidos_invalidos(cambios):
     with pytest.raises(ValueError):
