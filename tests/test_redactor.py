@@ -16,7 +16,8 @@ SIN_NOTAS = "Texto del post sin notas"
 
 def pedido_valido(**cambios):
     datos = {"tema": "café de Colombia", "plataforma": "X",
-             "audiencia": "Infantil", "objetivo": "Vender"}
+             "audiencia": "Infantil", "objetivo": "Vender",
+             "cliente": "tostadero-ventura"}  # NUEVO
     datos.update(cambios)
     return Pedido(**datos)
 
@@ -66,6 +67,7 @@ def test_redactar_avisa_si_las_notas_faltan_dos_veces():
     {"plataforma": "TikTok"},
     {"audiencia": "Jubilados"},
     {"objetivo": "Entretener"},
+    {"cliente": "no-existe"},  # NUEVO
 ])
 def test_pedidos_invalidos(cambios):
     with pytest.raises(ValueError):

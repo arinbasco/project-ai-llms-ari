@@ -10,6 +10,7 @@ from dataclasses import dataclass, field
 
 from langchain_core.messages import HumanMessage, SystemMessage
 
+from redaccion.clientes import cargar_cliente  
 from redaccion.llm import obtener_llm
 from redaccion.prompts import (
     AJUSTES_INFANTIL,
@@ -35,6 +36,7 @@ class Pedido:
     plataforma: str
     audiencia: str
     objetivo: str
+    cliente: str  
     buscadores: bool = False
 
     def validar(self):
@@ -47,6 +49,7 @@ class Pedido:
             raise ValueError(f"Audiencia desconocida: {self.audiencia}")
         if self.objetivo not in OBJETIVOS:
             raise ValueError(f"Objetivo desconocido: {self.objetivo}")
+        cargar_cliente(self.cliente)  
 
 
 @dataclass
