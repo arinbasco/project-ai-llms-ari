@@ -500,7 +500,31 @@ AJUSTES_INFANTIL = {
 """,
 }
 
-USUARIO = """PEDIDO
+FICHA = """FICHA DEL CLIENTE
+Escribes en nombre de este cliente.
+- Nombre: {nombre}
+- Tipo: {tipo}
+- Sector: {sector}
+- Descripción: {descripcion}
+VOZ
+- Tono: {tono}
+- Trato: {trato}
+- Emojis: {emojis}
+- Expresiones propias: {expresiones_propias}
+- Expresiones que no se usan nunca: {expresiones_vetadas}
+LÍMITES
+{limites}
+CÓMO USAR LA FICHA
+- Usa las expresiones propias solo cuando encajen. No las fuerces.
+- No uses nunca las expresiones vetadas, ni en el texto ni en los hashtags.
+- Los límites se cumplen siempre, aunque el pedido pida otra cosa. Si el
+  pedido lo pide, escríbelo sin eso y explícalo en A VERIFICAR.
+- Con los emojis, sigue la indicación más restrictiva entre la ficha, la
+  plataforma y la audiencia. Si alguna dice que no se usan, no los uses.
+"""
+
+USUARIO = """{ficha}
+PEDIDO
 {tema}
 
 PLATAFORMA
