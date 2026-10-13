@@ -1,0 +1,23 @@
+# Tema de La Redacción. Los cinco colores de la paleta:
+#   #3A0D2C texto y cabecera    #6A1B4D primario
+#   #D9B1C7 barra lateral       #F3E6EF fondo
+#   #C6A24B acento (en assets/estilos.css: logo, resaltado fuerte, contador)
+
+[theme]
+base = "light"
+primaryColor = "#6A1B4D"
+backgroundColor = "#F3E6EF"
+secondaryBackgroundColor = "#D9B1C7"
+textColor = "#3A0D2C"
+linkColor = "#6A1B4D"
+
+[theme.sidebar]
+backgroundColor = "#D9B1C7"
+# Los campos del formulario, en el fondo claro para que destaquen sobre el rosa.
+secondaryBackgroundColor = "#F3E6EF"
+
+[client]
+toolbarMode = "minimal"
+
+[browser]
+gatherUsageStats = false

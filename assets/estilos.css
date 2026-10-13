@@ -1,0 +1,74 @@
+/* Lo que no cubre el tema de .streamlit/config.toml.
+   Contraste comprobado (WCAG AA, 4,5:1 para texto normal):
+   #3A0D2C sobre #F3E6EF 13,6 · #3A0D2C sobre #D9B1C7 8,7 · #3A0D2C sobre #C6A24B 6,8
+   #F3E6EF sobre #3A0D2C 13,6 · #C6A24B sobre #3A0D2C 6,8 · #6A1B4D sobre #F3E6EF 9,3
+   #FFFFFF sobre #6A1B4D 11,2 (botones) · #6A1B4D sobre #D9B1C7 5,9
+   El dorado nunca va como texto sobre fondos claros (2,0 sobre #F3E6EF). */
+
+/* Cabecera */
+.cabecera {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #3A0D2C;
+  border-radius: 0.75rem;
+  padding: 0.9rem 1.2rem;
+  margin-bottom: 1rem;
+}
+.cabecera img { width: 52px; height: 52px; flex: none; }
+.cabecera .marca { color: #F3E6EF; font-size: 1.45rem; font-weight: 700; line-height: 1.2; }
+.cabecera .submarca { color: #C6A24B; font-size: 1rem; letter-spacing: 0.04em; }
+
+/* Títulos en el color primario */
+h1, h2, h3, h4 { color: #6A1B4D !important; }
+
+/* Tarjetas de las dos versiones */
+.st-key-tarjeta-original, .st-key-tarjeta-corregida {
+  border: 2px solid #6A1B4D !important;
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+/* Texto plano con sus saltos de línea */
+.texto-plano { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.55; }
+
+/* Resaltado de frases */
+mark.resaltado-fuerte, mark.resaltado-suave {
+  color: #3A0D2C;
+  padding: 0 0.15em;
+  border-radius: 0.2em;
+}
+mark.resaltado-fuerte { background: #C6A24B; }
+mark.resaltado-suave { background: #D9B1C7; }
+
+/* Lista de problemas */
+.problemas { list-style: none; padding: 0; margin: 0; }
+.problemas li {
+  border-left: 4px solid #6A1B4D;
+  border-radius: 0.4rem;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.6rem;
+}
+.problemas .tipo {
+  display: inline-block;
+  color: #3A0D2C;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.05rem 0.5rem;
+  border-radius: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+.problemas .tipo.fuerte { background: #C6A24B; }
+.problemas .tipo.suave { background: #D9B1C7; }
+.problemas .frase { font-style: italic; }
+
+/* Pedidos que quedan hoy */
+.contador {
+  display: inline-block;
+  background: #C6A24B;
+  color: #3A0D2C;
+  font-weight: 600;
+  padding: 0.25rem 0.7rem;
+  border-radius: 1rem;
+  margin-top: 0.5rem;
+}
