@@ -4,7 +4,7 @@ Generador de contenido con modelos de lenguaje para Digital Content, una agencia
 
 Proyecto individual del Bootcamp de Inteligencia Artificial de Factoría F5 en Madrid (promoción P7), basado en el [briefing del proyecto LLMs](https://github.com/Factoria-F5-madrid/project-ai-llms).
 
-Demo desplegada en Streamlit Community Cloud *(enlace pendiente de despliegue)*.
+Demo desplegada en [Streamlit Community Cloud](https://redacciondigitalcontent.streamlit.app/).
 
 ## Índice
 
