@@ -1,0 +1,42 @@
+Fecha: 2026-10-13 01:54
+Revisor: model_name=qwen/qwen3.8-27b | temperature=1e-08 | reasoning_effort=none | max_tokens=1000 | model_kwargs={'seed': 42}
+REVISOR: 1836 caracteres
+Textos de: docs/prueba_verificador_02.txt
+Script: scripts/revisar_prueba.py
+
+======================================================================
+CASO 1. Tostadero | Instagram | Vender
+Tokens del revisor: entrada 818 | salida 526
+CAPA 2: 7 problemas | descartados por el filtro: 0
+- [ADORNO] Descubre el aroma de Colombia en cada sorbo | El pedido solo indica que es café de Colombia recién tostado, sin mencionar aromas ni la experiencia del sorbo.
+- [AÑADE] Es un grano 100 % colombiano | El pedido especifica "café de Colombia", pero no afirma que sea un grano 100% colombiano (podría ser una mezcla).
+- [AÑADE] lo que conserva sus notas intensas y equilibradas | El pedido y la ficha no describen el perfil organoléptico del café (notas intensas y equilibradas).
+- [AÑADE] Cada bolsa lleva el sabor auténtico de la finca a tu taza | El pedido no menciona el origen específico de "la finca" ni garantiza que el sabor sea "auténtico de la finca".
+- [AÑADE] ya sea en casa o en la barra | El pedido indica que se compra en la cafetería para llevar a casa, pero no especifica explícitamente que se pueda consumir en la barra (aunque la ficha dice que vende para tomar allí, el pedido específico es para llevar, y esta frase lo presenta como una característica de la bolsa en sí misma en ambos contextos de consumo inmediato). Nota: Aunque la ficha dice "Vende café para tomar allí", el pedido es específico de la bolsa. Sin embargo, la frase "ya sea en casa o en la barra" atribuye a la bolsa la capacidad de ser consumida en ambos sitios, lo cual es coherente con la ficha general, pero el pedido solo cubre la venta en bolsa. Revisando estrictamente: La ficha dice "Vende café para tomar allí y en bolsa". Por tanto, decir que se puede tomar en la barra está respaldado por la ficha. No se señala.
+- [ADORNO] Imagina una mañana tranquila, una taza humeante y el aroma que llena la cocina mientras lees el periódico | Es una escena imaginaria y descriptiva que no aporta datos del producto ni del cliente.
+- [ADORNO] Ese momento empieza con nuestro café recién tostado | Frase de estilo que conecta la escena anterior con el producto sin añadir información factual.
+
+======================================================================
+CASO 2. Banco Faro | LinkedIn | Informar
+Tokens del revisor: entrada 851 | salida 415
+CAPA 2: 5 problemas | descartados por el filtro: 0
+- [AÑADE] La herramienta permite clasificar de forma automática los pagos recurrentes, como alquiler, servicios o suscripciones, en una categoría independiente de la cuenta corriente. | El pedido solo indica que la herramienta sirve para "apartar los gastos fijos", sin mencionar que la clasificación sea automática ni especificar ejemplos como alquiler o suscripciones.
+- [AÑADE] Con este apartado, los usuarios pueden visualizar el importe total de sus compromisos fijos y planificar mejor su flujo de caja. | El pedido no menciona la visualización de importes totales ni la planificación del flujo de caja como funciones de la herramienta.
+- [AÑADE] Al estar integrada en la misma plataforma, la gestión de los fondos se realiza sin necesidad de mover dinero entre cuentas ni crear subcuentas externas. | El pedido no especifica que no sea necesario mover dinero ni que no se creen subcuentas externas, solo que es un espacio separado dentro de la app.
+- [AÑADE] Para los profesionales de finanzas y gestión de gastos, la novedad facilita la elaboración de presupuestos mensuales y la identificación de oportunidades de ahorro dentro del entorno digital del banco. | El pedido no menciona a profesionales de finanzas como público objetivo ni afirma que facilite la elaboración de presupuestos o la identificación de oportunidades de ahorro.
+- [CONTRADICE] La disponibilidad inmediata a todos los clientes garantiza una adopción rápida y una mayor consistencia en la información financiera que manejan. | El pedido indica que la herramienta estará disponible "a partir del 1 de noviembre de 2026", lo cual no es "inmediata" en el sentido de estarlo ya, y el texto añade promesas de "adopción rápida" y "consistencia" que no están en el pedido.
+
+======================================================================
+CASO 3. Universidad Munin | Blog | Informar
+Tokens del revisor: entrada 1139 | salida 745
+CAPA 2: 10 problemas | descartados por el filtro: 0
+- [AÑADE] Durante doce meses se instalaron termómetros en 20 calles con presencia de árboles y en 20 sin ellos. | El pedido indica que se midió la temperatura en 40 calles, pero no especifica la distribución exacta (20 y 20) ni el uso de termómetros.
+- [AÑADE] Cada sensor registró la temperatura cada hora, lo que permitió comparar las medias diarias de ambas tipologías de calle. | El pedido no menciona la frecuencia de registro (cada hora) ni el cálculo de medias diarias.
+- [AÑADE] El método garantiza que las diferencias observadas no se deben a la hora del día ni a la ubicación geográfica dentro de la ciudad. | El pedido no afirma que el método garantice la exclusión de variables como la hora del día o la ubicación geográfica.
+- [GENERAL] Los árboles reducen la temperatura mediante dos procesos: la sombra que bloquea la radiación solar directa y la evapotranspiración, que consiste en la liberación de vapor de agua desde las hojas. | Es una explicación de conocimiento general sobre la biología de los árboles que no aparece en el pedido ni en la ficha.
+- [GENERAL] En una comparación cotidiana, es como abrir una ventana en una habitación caliente; la ventilación ayuda a bajar la temperatura, pero a diferencia de una ventana, los árboles continúan enfriando durante todo el día sin necesidad de energía externa. | Es una analogía y explicación general que no se deriva del pedido ni de la ficha.
+- [GENERAL] La analogía deja de ser válida cuando la densidad de árboles es insuficiente para crear sombra significativa, pues la reducción de calor depende de la cobertura vegetal. | Es una afirmación general sobre la relación entre densidad de árboles y sombra que no está en el pedido ni en la ficha.
+- [AÑADE] Una diferencia de 3 °C puede mejorar el confort térmico de los peatones y reducir la demanda de energía para climatizar edificios cercanos. | El pedido solo menciona la diferencia de temperatura, no afirma que esto mejore el confort de peatones ni reduzca la demanda energética de edificios.
+- [AÑADE] Los datos también sirven para orientar políticas de planificación urbana que favorezcan la plantación de árboles en zonas vulnerables al calor. | El pedido no indica que los datos sirvan para orientar políticas de planificación urbana ni menciona zonas vulnerables al calor.
+- [AÑADE] La comunidad universitaria y los ciudadanos podrán profundizar en los resultados y en las recomendaciones durante la conferencia anunciada. | El pedido indica que se presentan los resultados, pero no menciona que se presenten "recomendaciones" ni que se pueda "profundizar" en ellas.
+- [AÑADE] Para conocer más detalles sobre la metodología y las propuestas de la Universidad Munin, visita la página del grupo de Ecología Urbana o acude a la conferencia del 20 de noviembre en el campus. | El pedido no menciona la existencia de una página web del grupo ni de "propuestas" de la Universidad.
