@@ -20,12 +20,11 @@ from redaccion.llm import obtener_revisor
 from redaccion.prompts import REVISOR
 from redaccion.verificador import verificar_capa2
 
-# --- Configuración de esta pasada ---
-RAZONAMIENTO = "low"
+# --- Configuración concordante al plan gratuito de Groq ---
+RAZONAMIENTO = "none"
 TEMPERATURA = 0
-MAX_TOKENS = 2000
-FORMATO_RAZONAMIENTO = "parsed"
-SALIDA = RAIZ / "docs" / "prueba_revisor_04.txt"
+MAX_TOKENS = 1000
+FORMATO_RAZONAMIENTO = None
 # -------------------------------------
 
 ENTRADA = RAIZ / "docs" / "prueba_verificador_02.txt"

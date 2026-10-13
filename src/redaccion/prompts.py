@@ -586,3 +586,33 @@ PEDIDO
 
 TEXTO A REVISAR
 {texto}"""
+
+CORRECCION = """El revisor encontró estos problemas en tu texto:
+
+{problemas}
+
+Escribe de nuevo el texto corrigiendo solo esos puntos.
+
+CÓMO CORRIGES
+- Si el problema es un dato que no está en el pedido ni en la ficha,
+  quítalo. No lo sustituyas por otro dato o promesa parecida. Si el texto
+  queda más corto que la extensión de la plataforma, está bien.
+- Si contradice el pedido o la ficha, ajústalo a lo que dicen.
+- Si es un fallo de formato (hashtags, emojis, Markdown, trato, longitud,
+  frases prohibidas), corrígelo según las instrucciones de la plataforma,
+  la audiencia y la ficha.
+
+QUÉ NO HACES
+- No cambies las frases que no aparecen en la lista. Cópialas tal cual.
+- No añadas frases nuevas para enlazar ni para cerrar el texto.
+- No uses las expresiones vetadas ni rompas los límites de la ficha.
+
+LAS NOTAS
+- Responde con el mismo formato de antes: primero el texto y después la
+  línea NOTAS PARA REVISAR con sus tres notas, en texto plano, sin
+  asteriscos.
+- En DATOS QUE FALTAN, conserva lo que había y añade los datos que
+  quitaste y que harían falta para poder decirlo con respaldo.
+- En A VERIFICAR, conserva lo que había.
+- En ENFOQUE, indica qué corregiste.
+"""

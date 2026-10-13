@@ -17,6 +17,8 @@ CON_NOTAS = "Texto del post\n\n---\n**NOTAS PARA REVISAR**\nDATOS QUE FALTAN: ni
 SIN_NOTAS = "Texto del post sin notas"
 RESPUESTA_COMPLETA = ("Café recién tostado.\n\nNOTAS PARA REVISAR\n"
                       "DATOS QUE FALTAN: ninguno\nA VERIFICAR: ninguna\nENFOQUE: directo.")
+RESPUESTA_CORREGIDA = ("Café recién tostado. #café\n\nNOTAS PARA REVISAR\n"  # NUEVO
+                       "DATOS QUE FALTAN: ninguno\nA VERIFICAR: ninguna\nENFOQUE: añadí un hashtag.")
 
 
 class RevisorRoto:
@@ -24,6 +26,7 @@ class RevisorRoto:
 
     def invoke(self, mensajes):
         raise RuntimeError("sin cuota")
+
 
 class RevisorConTokens:
     """Revisor falso que responde NINGUNO e informa de los tokens gastados."""
@@ -34,6 +37,19 @@ class RevisorConTokens:
             usage_metadata={"input_tokens": 100, "output_tokens": 20,
                             "total_tokens": 120},
         )
+
+
+class RedactorQueFallaAlCorregir:  # NUEVO
+    """Redactor falso que escribe bien la primera vez y falla al corregir."""
+
+    def __init__(self):
+        self.llamadas = 0
+
+    def invoke(self, mensajes):
+        self.llamadas += 1
+        if self.llamadas > 1:
+            raise RuntimeError("sin cuota")
+        return AIMessage(content=RESPUESTA_COMPLETA)
 
 
 def pedido_valido(**cambios):
@@ -112,7 +128,7 @@ def test_redactar_avisa_si_las_notas_faltan_dos_veces():
 def test_redactar_junta_capa1_y_capa2():
     llm = FakeListChatModel(responses=[RESPUESTA_COMPLETA])
     revisor = FakeListChatModel(responses=["FRASE: recién tostado\nTIPO: ADORNO\nMOTIVO: x"])
-    resultado = redactar(pedido_valido(), llm, revisor=revisor)
+    resultado = redactar(pedido_valido(), llm, revisor=revisor, reescribir=False)  # NUEVO reescribir
     reglas = {problema.regla for problema in resultado.problemas}
     assert "hashtags" in reglas
     assert "ADORNO" in reglas
@@ -120,16 +136,48 @@ def test_redactar_junta_capa1_y_capa2():
 
 def test_redactar_avisa_si_falla_la_capa2():
     llm = FakeListChatModel(responses=[RESPUESTA_COMPLETA])
-    resultado = redactar(pedido_valido(), llm, revisor=RevisorRoto())
+    resultado = redactar(pedido_valido(), llm, revisor=RevisorRoto(), reescribir=False)  # NUEVO reescribir
     assert resultado.texto == "Café recién tostado."
     assert any("capa 2" in aviso for aviso in resultado.avisos)
 
+
 def test_tokens_del_revisor_van_aparte():
     llm = FakeListChatModel(responses=[RESPUESTA_COMPLETA])
-    resultado = redactar(pedido_valido(), llm, revisor=RevisorConTokens())
+    resultado = redactar(pedido_valido(), llm, revisor=RevisorConTokens(), reescribir=False)  # NUEVO reescribir
     assert resultado.tokens_revisor_entrada == 100
     assert resultado.tokens_revisor_salida == 20
     assert resultado.tokens_entrada == 0
+
+
+def test_reescribe_si_hay_problemas():  # NUEVO
+    llm = FakeListChatModel(responses=[RESPUESTA_COMPLETA, RESPUESTA_CORREGIDA])
+    revisor = FakeListChatModel(responses=["NINGUNO", "NINGUNO"])
+    resultado = redactar(pedido_valido(), llm, revisor=revisor)
+    assert resultado.texto == "Café recién tostado."
+    assert resultado.correccion.texto == "Café recién tostado. #café"
+    assert resultado.correccion.problemas == []
+
+
+def test_no_reescribe_si_no_hay_problemas():  # NUEVO
+    llm = FakeListChatModel(responses=[RESPUESTA_CORREGIDA])
+    revisor = FakeListChatModel(responses=["NINGUNO"])
+    resultado = redactar(pedido_valido(), llm, revisor=revisor)
+    assert resultado.correccion is None
+
+
+def test_no_reescribe_por_adorno():  # NUEVO
+    llm = FakeListChatModel(responses=[RESPUESTA_CORREGIDA])
+    revisor = FakeListChatModel(responses=["FRASE: recién tostado\nTIPO: ADORNO\nMOTIVO: x"])
+    resultado = redactar(pedido_valido(), llm, revisor=revisor)
+    assert resultado.correccion is None
+
+
+def test_si_falla_la_reescritura_queda_el_original():  # NUEVO
+    revisor = FakeListChatModel(responses=["NINGUNO"])
+    resultado = redactar(pedido_valido(), RedactorQueFallaAlCorregir(), revisor=revisor)
+    assert resultado.texto == "Café recién tostado."
+    assert resultado.correccion is None
+    assert any("reescritura" in aviso for aviso in resultado.avisos)
 
 
 @pytest.mark.parametrize("cambios", [
