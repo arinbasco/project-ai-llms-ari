@@ -9,6 +9,7 @@ from redaccion.presentacion import (
     CLASE_FUERTE,
     CLASE_SUAVE,
     etiqueta,
+    mensaje_error_redactor,
     ordenar_problemas,
     resaltar,
     separar_notas,
@@ -144,3 +145,33 @@ def test_no_resalta_problemas_sin_frase_ni_de_notas():
 def test_frase_repetida_resalta_la_primera_aparicion():
     html = resaltar("hoy y hoy", [Problema("AÑADE", "m", "hoy")])
     assert html.startswith("<mark") and html.endswith(" y hoy")
+
+
+# --- mensaje_error_redactor ---
+
+
+class APIConnectionError(Exception):
+    """Imita la excepción de Groq, que se reconoce por el nombre."""
+
+
+class APITimeoutError(APIConnectionError):
+    pass
+
+
+def test_mensaje_de_cuota_agotada():
+    RateLimitError = type("RateLimitError", (Exception,), {})
+    assert "cuota" in mensaje_error_redactor(RateLimitError("429"))
+
+
+def test_mensaje_reconoce_las_clases_padre():
+    assert "conexión" in mensaje_error_redactor(APIConnectionError())
+    assert "tardó" in mensaje_error_redactor(APITimeoutError())
+
+
+def test_mensaje_de_configuracion():
+    mensaje = mensaje_error_redactor(ValueError("Falta GROQ_MODEL en el archivo .env"))
+    assert "GROQ_MODEL" in mensaje
+
+
+def test_mensaje_generico_con_el_tipo():
+    assert "KeyError" in mensaje_error_redactor(KeyError("x"))

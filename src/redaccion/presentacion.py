@@ -172,3 +172,32 @@ def resaltar(texto, problemas):
         actual = fin
     partes.append(html.escape(texto[actual:], quote=False))
     return "".join(partes)
+
+
+# --- Errores del redactor ---
+
+ERRORES_REDACTOR = {
+    "RateLimitError": "Se ha agotado la cuota del modelo. Prueba de nuevo más tarde.",
+    "APITimeoutError": "El modelo tardó demasiado en responder. Vuelve a intentarlo.",
+    "APIConnectionError": "No hay conexión con el servicio del modelo. Comprueba la "
+                          "conexión y vuelve a intentarlo.",
+    "AuthenticationError": "La clave de Groq no es válida. Revisa los secretos de la aplicación.",
+    "NotFoundError": "El modelo indicado en GROQ_MODEL no existe. Revisa los secretos "
+                     "de la aplicación.",
+    "InternalServerError": "El servicio del modelo ha fallado. Vuelve a intentarlo en unos "
+                           "minutos.",
+}
+
+
+def mensaje_error_redactor(error):
+    """Explica en lenguaje normal por qué no respondió el redactor.
+
+    Se busca por nombre de clase, también en las clases padre, para no
+    depender de importar las excepciones de Groq.
+    """
+    for clase in type(error).__mro__:
+        if clase.__name__ in ERRORES_REDACTOR:
+            return ERRORES_REDACTOR[clase.__name__]
+    if isinstance(error, ValueError):  # Falta GROQ_MODEL u otra configuración.
+        return f"Falta configuración: {error}"
+    return f"No se pudo redactar el texto ({type(error).__name__}). Vuelve a intentarlo."
