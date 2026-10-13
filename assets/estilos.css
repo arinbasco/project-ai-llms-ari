@@ -26,7 +26,7 @@ h1, h2, h3, h4 { color: #6A1B4D !important; }
 .st-key-tarjeta-original, .st-key-tarjeta-corregida {
   border: 2px solid #6A1B4D !important;
   border-radius: 0.75rem;
-  padding: 1rem;
+  padding: 1rem 1rem 1.25rem !important;
 }
 
 /* Texto plano con sus saltos de línea */

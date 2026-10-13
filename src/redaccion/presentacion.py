@@ -133,11 +133,18 @@ def buscar_frase(texto_normal, posiciones, frase):
     frase_normal = normalizar(frase)
     if not frase_normal:
         return None
+    borde_inicio = frase_normal[0].isalnum()
+    borde_fin = frase_normal[-1].isalnum()
     inicio = texto_normal.find(frase_normal)
-    if inicio < 0:
-        return None
-    fin = inicio + len(frase_normal) - 1
-    return posiciones[inicio], posiciones[fin] + 1
+    while inicio >= 0:
+        fin = inicio + len(frase_normal)
+        # Como buscar_expresion(): "tu" no vale dentro de "Ventura".
+        corta_antes = borde_inicio and inicio > 0 and texto_normal[inicio - 1].isalnum()
+        corta_despues = borde_fin and fin < len(texto_normal) and texto_normal[fin].isalnum()
+        if not corta_antes and not corta_despues:
+            return posiciones[inicio], posiciones[fin - 1] + 1
+        inicio = texto_normal.find(frase_normal, inicio + 1)
+    return None
 
 
 def resaltar(texto, problemas):
@@ -145,8 +152,9 @@ def resaltar(texto, problemas):
 
     El texto se escapa entero, así que nunca se interpreta como HTML. Las
     frases se buscan como en el filtro de citas de la capa 2: sin distinguir
-    mayúsculas y con espacios y comillas unificados. Las que no aparecen no se
-    resaltan. Se recorren en el orden de ordenar_problemas(); si una se solapa
+    mayúsculas y con espacios y comillas unificados. Además, si la frase
+    empieza o acaba en letra o número, no se busca dentro de otra palabra.
+    Las que no aparecen no se resaltan. Se recorren en el orden de ordenar_problemas(); si una se solapa
     con otra ya resaltada, se deja sin resaltar.
     """
     texto_normal, posiciones = normalizar_con_posiciones(texto)

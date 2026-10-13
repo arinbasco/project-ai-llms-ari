@@ -142,6 +142,12 @@ def test_no_resalta_problemas_sin_frase_ni_de_notas():
     assert "<mark" not in html
 
 
+def test_no_resalta_dentro_de_otra_palabra():
+    html = resaltar("Tostadero Ventura, ven con tu familia.", [Problema("trato", "m", "tu")])
+    assert "Ventura" in html
+    assert ">tu</mark> familia" in html
+
+
 def test_frase_repetida_resalta_la_primera_aparicion():
     html = resaltar("hoy y hoy", [Problema("AÑADE", "m", "hoy")])
     assert html.startswith("<mark") and html.endswith(" y hoy")
