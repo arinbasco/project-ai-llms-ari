@@ -77,3 +77,17 @@ def cargar_cliente(id_cliente: str) -> Cliente:
 
     cliente.validar()
     return cliente
+
+def listar_clientes() -> list[Cliente]:
+    """Devuelve las fichas válidas de data/clientes/, ordenadas por nombre.
+
+    Las fichas que no cargan (JSON roto, campos que faltan, id que no
+    coincide) se dejan fuera sin avisar.
+    """
+    validos = []
+    for ruta in CARPETA_CLIENTES.glob("*.json"):
+        try:
+            validos.append(cargar_cliente(ruta.stem))
+        except (ValueError, OSError):  # json.JSONDecodeError es un ValueError.
+            continue
+    return sorted(validos, key=lambda cliente: cliente.nombre.lower())

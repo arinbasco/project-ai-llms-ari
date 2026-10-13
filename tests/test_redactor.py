@@ -11,7 +11,17 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from redaccion.clientes import Cliente, Voz
 from redaccion.prompts import SISTEMA
-from redaccion.redactor import Pedido, armar_ficha, armar_mensajes, redactar, separar
+from redaccion.redactor import (
+    CORRIGIENDO,
+    REDACTANDO,
+    REVISANDO,
+    REVISANDO_CORRECCION,
+    Pedido,
+    armar_ficha,
+    armar_mensajes,
+    redactar,
+    separar,
+)
 
 CON_NOTAS = "Texto del post\n\n---\n**NOTAS PARA REVISAR**\nDATOS QUE FALTAN: ninguno"
 SIN_NOTAS = "Texto del post sin notas"
@@ -180,6 +190,46 @@ def test_si_falla_la_reescritura_queda_el_original():  # NUEVO
     assert any("reescritura" in aviso for aviso in resultado.avisos)
 
 
+
+def redactar_anotando_etapas(llm, revisor, **opciones):
+    """Redacta y devuelve el resultado y las etapas anunciadas, en orden."""
+    etapas = []
+    resultado = redactar(pedido_valido(), llm, revisor=revisor,
+                         avisar=etapas.append, **opciones)
+    return resultado, etapas
+
+
+def test_avisa_las_cuatro_etapas_si_reescribe():
+    llm = FakeListChatModel(responses=[RESPUESTA_COMPLETA, RESPUESTA_CORREGIDA])
+    revisor = FakeListChatModel(responses=["NINGUNO", "NINGUNO"])
+    _, etapas = redactar_anotando_etapas(llm, revisor)
+    assert etapas == [REDACTANDO, REVISANDO, CORRIGIENDO, REVISANDO_CORRECCION]
+
+
+def test_sin_problemas_no_avisa_la_correccion():
+    llm = FakeListChatModel(responses=[RESPUESTA_CORREGIDA])
+    revisor = FakeListChatModel(responses=["NINGUNO"])
+    _, etapas = redactar_anotando_etapas(llm, revisor)
+    assert etapas == [REDACTANDO, REVISANDO]
+
+
+def test_si_falla_la_reescritura_no_avisa_la_segunda_revision():
+    revisor = FakeListChatModel(responses=["NINGUNO"])
+    _, etapas = redactar_anotando_etapas(RedactorQueFallaAlCorregir(), revisor)
+    assert etapas == [REDACTANDO, REVISANDO, CORRIGIENDO]
+
+
+def test_sin_verificar_solo_avisa_la_redaccion():
+    llm = FakeListChatModel(responses=[RESPUESTA_COMPLETA])
+    _, etapas = redactar_anotando_etapas(llm, None, verificar_texto=False)
+    assert etapas == [REDACTANDO]
+
+
+def test_sin_avisar_el_resultado_no_cambia():
+    llm = FakeListChatModel(responses=[RESPUESTA_COMPLETA, RESPUESTA_CORREGIDA])
+    revisor = FakeListChatModel(responses=["NINGUNO", "NINGUNO"])
+    resultado = redactar(pedido_valido(), llm, revisor=revisor)
+    assert resultado.correccion.texto == "Café recién tostado. #café"
 @pytest.mark.parametrize("cambios", [
     {"tema": "   "},
     {"plataforma": "TikTok"},

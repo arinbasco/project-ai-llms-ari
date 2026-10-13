@@ -36,6 +36,12 @@ EMOJIS_TEXTO = {"no": "no usa emojis", "moderado": "con moderación",
                 "libre": "los usa con libertad"}
 TIPOS_CAPA2_CORREGIBLES = {"CONTRADICE", "AÑADE"}
 
+# Etapas que redactar() anuncia con avisar(), en el orden en que ocurren.
+REDACTANDO = "redactando"
+REVISANDO = "revisando"
+CORRIGIENDO = "corrigiendo"
+REVISANDO_CORRECCION = "revisando la corrección"
+
 
 @dataclass
 class Pedido:
@@ -169,11 +175,17 @@ def listar_problemas(problemas):
     return "\n".join(lineas)
 
 
-def corregir(resultado, pedido, llm, revisor=None):
+def no_avisar(etapa):
+    """avisar() por defecto: no hace nada."""
+
+
+def corregir(resultado, pedido, llm, revisor=None, avisar=no_avisar):
     """Capa 3: si hay problemas corregibles, pide una reescritura y la verifica."""
     pendientes = problemas_a_corregir(resultado.problemas)
     if not pendientes:
         return
+
+    avisar(CORRIGIENDO)
 
     original = f"{resultado.texto}\n\nNOTAS PARA REVISAR\n{resultado.notas or ''}"
     mensajes = armar_mensajes(pedido) + [
@@ -199,6 +211,7 @@ def corregir(resultado, pedido, llm, revisor=None):
         correccion.avisos.append(
             "La reescritura puede estar incompleta porque el modelo llegó al límite de tokens."
         )
+    avisar(REVISANDO_CORRECCION)
     verificar(correccion, pedido, revisor)
 
     resultado.tokens_revisor_entrada += correccion.tokens_revisor_entrada
@@ -206,13 +219,21 @@ def corregir(resultado, pedido, llm, revisor=None):
     resultado.correccion = correccion
 
 
-def redactar(pedido, llm=None, verificar_texto=True, revisor=None, reescribir=True):
-    """Redacta el pedido y devuelve un Resultado con texto, notas, avisos y problemas."""
+def redactar(pedido, llm=None, verificar_texto=True, revisor=None, reescribir=True,
+             avisar=None):
+    """Redacta el pedido y devuelve un Resultado con texto, notas, avisos y problemas.
+
+    avisar, si se indica, se llama con el nombre de cada etapa al empezarla
+    (REDACTANDO, REVISANDO, CORRIGIENDO, REVISANDO_CORRECCION). Las etapas que
+    no ocurren no se anuncian.
+    """
+    avisar = avisar or no_avisar
     pedido.validar()
     llm = llm or obtener_llm()
     mensajes = armar_mensajes(pedido)
     resultado = Resultado()
 
+    avisar(REDACTANDO)
     for intento in range(1, MAX_INTENTOS + 1):
         respuesta = llm.invoke(mensajes)
 
@@ -237,7 +258,8 @@ def redactar(pedido, llm=None, verificar_texto=True, revisor=None, reescribir=Tr
         )
 
     if verificar_texto:
+        avisar(REVISANDO)
         verificar(resultado, pedido, revisor)
         if reescribir:
-            corregir(resultado, pedido, llm, revisor)
+            corregir(resultado, pedido, llm, revisor, avisar)
     return resultado

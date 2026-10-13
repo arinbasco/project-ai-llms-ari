@@ -9,7 +9,7 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from redaccion import clientes
-from redaccion.clientes import cargar_cliente
+from redaccion.clientes import cargar_cliente, listar_clientes
 
 FICHA_BASE = {
     "id": "cliente-prueba",
@@ -69,3 +69,25 @@ def test_fichas_invalidas(datos, tmp_path, monkeypatch):
     escribir_ficha(tmp_path, datos)
     with pytest.raises(ValueError):
         cargar_cliente("cliente-prueba")
+
+def test_listar_clientes_de_la_demo():
+    ids = [cliente.id for cliente in listar_clientes()]
+    assert set(ids) == {"tostadero-ventura", "banco-faro", "universidad-munin"}
+
+
+def test_listar_clientes_ordena_por_nombre_y_omite_los_invalidos(tmp_path, monkeypatch):
+    monkeypatch.setattr(clientes, "CARPETA_CLIENTES", tmp_path)
+    for id_cliente, nombre in [("zeta", "Zeta"), ("alfa", "alfa")]:
+        datos = ficha_con(id=id_cliente, nombre=nombre)
+        (tmp_path / f"{id_cliente}.json").write_text(json.dumps(datos), encoding="utf-8")
+    (tmp_path / "roto.json").write_text("{no es json", encoding="utf-8")
+    (tmp_path / "mal-id.json").write_text(json.dumps(ficha_con(id="otro")), encoding="utf-8")
+    (tmp_path / "Mayusculas.json").write_text(json.dumps(FICHA_BASE), encoding="utf-8")
+    (tmp_path / ".gitkeep").write_text("", encoding="utf-8")
+
+    assert [cliente.nombre for cliente in listar_clientes()] == ["alfa", "Zeta"]
+
+
+def test_listar_clientes_con_carpeta_vacia(tmp_path, monkeypatch):
+    monkeypatch.setattr(clientes, "CARPETA_CLIENTES", tmp_path)
+    assert listar_clientes() == []
