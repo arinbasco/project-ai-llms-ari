@@ -91,9 +91,11 @@ def main():
             f"CASO {numero}. {nombre}",
             f"Cliente: {pedido.cliente} | Audiencia: {pedido.audiencia}",
             f"Pedido: {pedido.tema}",
-            (f"Intentos: {resultado.intentos} | Tokens de entrada: "
-             f"{resultado.tokens_entrada} | Tokens de salida: {resultado.tokens_salida} "
-             "(redactor + revisor)"),
+            f"Intentos: {resultado.intentos}",
+            (f"Tokens del redactor: entrada {resultado.tokens_entrada} | "
+             f"salida {resultado.tokens_salida}"),
+            (f"Tokens del revisor: entrada {resultado.tokens_revisor_entrada} | "
+             f"salida {resultado.tokens_revisor_salida}"),
             f"Avisos: {resultado.avisos or 'ninguno'}",
             "",
             "TEXTO",

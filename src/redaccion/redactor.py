@@ -70,6 +70,8 @@ class Resultado:
     descartados: int = 0
     tokens_entrada: int = 0
     tokens_salida: int = 0
+    tokens_revisor_entrada: int = 0
+    tokens_revisor_salida: int = 0
     intentos: int = 0
 
 
@@ -137,8 +139,8 @@ def verificar(resultado, pedido, revisor=None):
         return
     resultado.problemas += revision.problemas
     resultado.descartados = revision.descartados
-    resultado.tokens_entrada += revision.tokens_entrada
-    resultado.tokens_salida += revision.tokens_salida
+    resultado.tokens_revisor_entrada = revision.tokens_entrada
+    resultado.tokens_revisor_salida = revision.tokens_salida
 
 
 def redactar(pedido, llm=None, verificar_texto=True, revisor=None):
