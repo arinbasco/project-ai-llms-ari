@@ -1,0 +1,232 @@
+Fecha: 2026-10-13 15:16
+Redactor: model_name=openai/gpt-oss-120b | temperature=0.7 | reasoning_effort=low | max_tokens=2000 | model_kwargs={'seed': 42}
+Revisor: model_name=qwen/qwen3.8-27b | temperature=1e-08 | reasoning_effort=none | max_tokens=1000 | model_kwargs={'seed': 42}
+SISTEMA: 3146 caracteres | REVISOR: 1836 caracteres | CORRECCION: 1170 caracteres
+Reescritura: activada
+Script: scripts/probar_verificador.py
+
+======================================================================
+CASO 1. Tostadero | Instagram | Vender
+Cliente: tostadero-ventura | Audiencia: Público general
+Pedido: Bolsa de café de Colombia recién tostado, 250 gramos, a 14 euros. Se compra en la cafetería.
+Intentos: 1
+Tokens del redactor (con reescritura): entrada 4498 | salida 612
+Tokens del revisor (con segunda revisión): entrada 1599 | salida 565
+
+--- VERSIÓN ORIGINAL ---
+
+TEXTO
+Descubre el aroma de Colombia en cada sorbo: nuestro café recién tostado, en bolsa de 250 g.  
+
+Es un café de origen único, tostado en el mismo local, por lo que conserva todo su carácter y frescura.  
+
+Imagina una mañana en casa, preparando tu taza con granos que acaban de salir del tostador; el sabor intenso y equilibrado te acompaña mientras lees el periódico.  
+
+Pásate por la cafetería y llévate la bolsa por 14 €.  
+
+¡Pásate y lleva el mejor café a tu cocina!  
+
+#caféColombiano #reciéntostado #cafeteríadebarrio #tostadorlocal #caféenbolsa #Madrid
+
+NOTAS
+DATOS QUE FALTAN: ninguno.  
+A VERIFICAR: que el precio de 14 € sea exacto y que la disponibilidad del producto sea constante.  
+ENFOQUE: He seguido la estructura A‑I‑D‑A, empezando con el origen como detalle distintivo, describiendo el producto, creando una escena de uso y finalizando con una llamada a la acción clara (“pásate”).
+
+Avisos: ninguno
+
+CAPA 1: 2 problemas
+- [frase prohibida] El prompt pide evitar "el mejor". | frase: el mejor
+- [frase prohibida] El prompt pide evitar "único". | frase: único
+
+CAPA 2: 5 problemas | descartados por el filtro: 0
+- [ADORNO] Descubre el aroma de Colombia en cada sorbo | El pedido solo indica que es café de Colombia, sin mencionar aromas ni la experiencia de beberlo.
+- [AÑADE] Es un café de origen único | El pedido especifica que es de Colombia, pero no afirma que sea de "origen único" (lo cual implica una exclusividad o lote específico no mencionado).
+- [ADORNO] conserva todo su carácter y frescura | Es una afirmación subjetiva sobre las cualidades organolépticas que no aparece en el pedido ni en la ficha.
+- [ADORNO] Imagina una mañana en casa, preparando tu taza con granos que acaban de salir del tostador; el sabor intenso y equilibrado te acompaña mientras lees el periódico. | Es una escena imaginaria y descripciones de sabor ("intenso y equilibrado") que no están respaldadas por los datos del pedido.
+- [AÑADE] ¡Pásate y lleva el mejor café a tu cocina! | El texto afirma que es "el mejor café", una superlativo y juicio de valor que no se encuentra en el pedido ni en la ficha.
+
+--- VERSIÓN CORREGIDA ---
+
+TEXTO
+Descubre el aroma de Colombia en cada sorbo: nuestro café recién tostado, en bolsa de 250 g.  
+
+Es un café de origen colombiano, tostado en el mismo local, por lo que conserva todo su carácter y frescura.  
+
+Imagina una mañana en casa, preparando tu taza con granos que acaban de salir del tostador; el sabor intenso y equilibrado te acompaña mientras lees el periódico.  
+
+Pásate por la cafetería y llévate la bolsa por 14 €.  
+
+¡Pásate y lleva el café a tu cocina!  
+
+#caféColombiano #reciéntostado #cafeteríadebarrio #tostadorlocal #caféenbolsa #Madrid
+
+NOTAS
+DATOS QUE FALTAN: ninguno.  
+A VERIFICAR: que el precio de 14 € sea exacto y que la disponibilidad del producto sea constante.  
+ENFOQUE: Eliminé las frases prohibidas “el mejor” y “único”, y la mención de “origen único”, manteniendo la estructura A‑I‑D‑A sin añadir nuevos datos.
+
+Avisos: ninguno
+
+CAPA 1: 0 problemas
+- ninguno
+
+CAPA 2: 4 problemas | descartados por el filtro: 0
+- [ADORNO] Descubre el aroma de Colombia en cada sorbo | El pedido y la ficha no mencionan el aroma ni la experiencia sensorial específica de "cada sorbo".
+- [ADORNO] conserva todo su carácter y frescura | El hecho de tostar en el local está en la ficha, pero la afirmación de que "conserva todo su carácter y frescura" es una valoración subjetiva no especificada en los documentos.
+- [ADORNO] Imagina una mañana en casa, preparando tu taza con granos que acaban de salir del tostador; el sabor intenso y equilibrado te acompaña mientras lees el periódico. | Es una escena imaginaria y descriptiva ("sabor intenso y equilibrado", "lees el periódico") que no aporta datos verificables del pedido ni de la ficha.
+- [ADORNO] ¡Pásate y lleva el café a tu cocina! | Aunque la acción de llevarlo a casa está implícita en "bolsa para llevar a casa" de la ficha, la frase es una repetición estilizada y redundante de la llamada a la acción anterior sin añadir información nueva.
+
+======================================================================
+CASO 2. Banco Faro | LinkedIn | Informar
+Cliente: banco-faro | Audiencia: Profesional
+Pedido: Banco Faro añade a la app una herramienta para apartar los gastos fijos del mes en un espacio separado de la cuenta. Disponible desde el 1 de noviembre de 2026 para todos los clientes.
+Intentos: 1
+Tokens del redactor (con reescritura): entrada 4875 | salida 761
+Tokens del revisor (con segunda revisión): entrada 1588 | salida 310
+
+--- VERSIÓN ORIGINAL ---
+
+TEXTO
+Banco Faro incorpora a su app una nueva herramienta para apartar los gastos fijos del mes en un espacio separado de la cuenta. La funcionalidad está disponible para todos los clientes a partir del 1 de noviembre de 2026.  
+
+Con este módulo, los usuarios pueden asignar de forma automática los pagos recurrentes (alquiler, servicios, suscripciones) a un contenedor exclusivo, facilitando la visualización del flujo de caja mensual.  
+
+La separación de gastos fijos permite un seguimiento más preciso y reduce la necesidad de conciliaciones manuales en la gestión financiera personal.  
+
+Al estar integrada en la misma aplicación, la herramienta mantiene la experiencia “desde la app” sin requerir pasos adicionales ni acceso a plataformas externas.  
+
+Los profesionales del sector pueden recomendar esta función a clientes que buscan mayor control presupuestario sin salir de su entorno bancario digital.  
+
+Para más información, consulte la sección de novedades de la app de Banco Faro.  
+
+#bancadigital #gestiónfinanciera #innovación
+
+NOTAS
+DATOS QUE FALTAN: ninguno.  
+A VERIFICAR: fecha de disponibilidad (1 de noviembre de 2026), nombre del banco (Banco Faro).  
+ENFOQUE: He seguido la estructura de apertura con la noticia, he detallado el cómo y el porqué, y he concluido con la acción recomendada para profesionales, manteniendo tono serio y directo.
+
+Avisos: ninguno
+
+CAPA 1: 0 problemas
+- ninguno
+
+CAPA 2: 5 problemas | descartados por el filtro: 0
+- [AÑADE] los usuarios pueden asignar de forma automática los pagos recurrentes (alquiler, servicios, suscripciones) a un contenedor exclusivo | El pedido solo indica que la herramienta sirve para "apartar los gastos fijos", sin especificar que la asignación sea automática ni enumerar ejemplos como alquiler o suscripciones.
+- [AÑADE] facilitando la visualización del flujo de caja mensual | El pedido no menciona la visualización del flujo de caja, solo describe la separación de gastos en un espacio distinto.
+- [AÑADE] reduce la necesidad de conciliaciones manuales en la gestión financiera personal | El pedido no afirma que la herramienta reduzca las conciliaciones manuales, es una consecuencia no documentada en la ficha ni en el encargo.
+- [AÑADE] sin requerir pasos adicionales ni acceso a plataformas externas | El pedido no especifica la ausencia de pasos adicionales ni de acceso a plataformas externas, solo indica que la herramienta se añade a la app.
+- [AÑADE] Los profesionales del sector pueden recomendar esta función a clientes que buscan mayor control presupuestario | El pedido no menciona a profesionales del sector ni su capacidad de recomendación, se centra en la disponibilidad para los clientes del banco.
+
+--- VERSIÓN CORREGIDA ---
+
+TEXTO
+Banco Faro incorpora a su app una nueva herramienta para apartar los gastos fijos del mes en un espacio separado de la cuenta. La funcionalidad está disponible para todos los clientes a partir del 1 de noviembre de 2026.  
+
+Al estar integrada en la misma aplicación, la herramienta mantiene la experiencia “desde la app”.  
+
+Para más información, consulte la sección de novedades de la app de Banco Faro.  
+
+#bancadigital #gestiónfinanciera #innovación
+
+NOTAS
+DATOS QUE FALTAN: ninguno.  
+A VERIFICAR: fecha de disponibilidad (1 de noviembre de 2026), nombre del banco (Banco Faro).  
+ENFOQUE: Eliminé las afirmaciones no respaldadas en el pedido y mantuve solo la información confirmada, respetando la estructura solicitada.
+
+Avisos: ninguno
+
+CAPA 1: 0 problemas
+- ninguno
+
+CAPA 2: 0 problemas | descartados por el filtro: 0
+- ninguno
+
+======================================================================
+CASO 3. Universidad Munin | Blog | Informar
+Cliente: universidad-munin | Audiencia: Divulgación
+Pedido: El grupo de Ecología Urbana de la Universidad Munin ha medido durante un año la temperatura en 40 calles de Madrid. En verano, las calles con árboles fueron de media 3 grados más frescas que las calles sin árboles. Los resultados se presentan en una conferencia abierta al público el 20 de noviembre de 2026 en el campus.
+Intentos: 1
+Tokens del redactor (con reescritura): entrada 4980 | salida 1286
+Tokens del revisor (con segunda revisión): entrada 2117 | salida 983
+
+--- VERSIÓN ORIGINAL ---
+
+TEXTO
+# Las calles con árboles son 3 °C más frescas en verano
+
+El grupo de Ecología Urbana de la Universidad Munin ha medido la temperatura en 40 calles de Madrid durante un año. El 20 de noviembre de 2026 presentará los resultados en una conferencia abierta al público en el campus.
+
+## Medición y diferencia encontrada
+
+Durante el periodo de estudio se registraron las temperaturas de verano en calles con y sin árboles. En promedio, las vías arboladas resultaron 3 °C más frescas que las que carecían de arbolado. Esta diferencia se obtuvo comparando los valores medios de ambas categorías a lo largo de varios días de máxima calor.
+
+## Por qué los árboles enfrían el entorno urbano
+
+Los árboles reducen la temperatura mediante dos procesos principales. Primero, sus hojas realizan la transpiración, liberando vapor de agua que absorbe calor del aire. Segundo, la sombra que proyectan disminuye la radiación directa sobre el pavimento. Ambos efectos combinados explican la reducción de 3 °C observada.
+
+## Implicaciones para la planificación de la ciudad
+
+Este dato sugiere que aumentar la cobertura arbórea en áreas densamente pobladas puede mitigar el efecto de isla de calor urbano. Sin embargo, la medida no es una solución total; factores como la densidad del tráfico y la arquitectura de los edificios también influyen. Por ello, la planificación urbana debería integrar el arbolado con otras estrategias de enfriamiento.
+
+La conferencia del 20 de noviembre permitirá a la comunidad universitaria y al público en general profundizar en la metodología, los resultados y las posibles aplicaciones de estos hallazgos. Para más información, visita la página web de la Universidad Munin o contacta al grupo de Ecología Urbana.
+
+NOTAS
+**DATOS QUE FALTAN:** Fuente de los datos de temperatura (instrumentos, organismo responsable). Detalles metodológicos específicos (frecuencia de medición, horarios).  
+**A VERIFICAR:** Fecha de la conferencia (20 noviembre 2026), cifra de diferencia de temperatura (3 °C), número de calles estudiadas (40). Comparación usada: “como una nevera” para ilustrar la frescura; la comparación deja de ser válida porque una nevera mantiene una temperatura constante, mientras que el efecto de los árboles varía según la hora y la radiación solar.  
+**ENFOQUE:** He seguido la estructura del objetivo informativo, comenzando con la noticia principal, desarrollando el cómo y porqué, y cerrando con información práctica sobre la conferencia. Los subtítulos organizan el contexto y los detalles de forma progresiva.
+
+Avisos: ninguno
+
+CAPA 1: 1 problemas
+- [notas] Las notas llevan asteriscos de negrita o cursiva y van en texto plano. | frase: **D
+
+CAPA 2: 6 problemas | descartados por el filtro: 0
+- [AÑADE] Esta diferencia se obtuvo comparando los valores medios de ambas categorías a lo largo de varios días de máxima calor. | El pedido indica que la medición se realizó "durante un año", pero el texto especifica que la comparación se hizo solo en "varios días de máxima calor".
+- [GENERAL] Los árboles reducen la temperatura mediante dos procesos principales. Primero, sus hojas realizan la transpiración, liberando vapor de agua que absorbe calor del aire. Segundo, la sombra que proyectan disminuye la radiación directa sobre el pavimento. | El pedido y la ficha no contienen explicaciones científicas sobre los mecanismos de enfriamiento (transpiración y sombra), por lo que es conocimiento general no atribuido al cliente.
+- [GENERAL] Este dato sugiere que aumentar la cobertura arbórea en áreas densamente pobladas puede mitigar el efecto de isla de calor urbano. | El pedido no menciona el "efecto de isla de calor urbano" ni sugiere implicaciones para la planificación urbana, por lo que es una afirmación de conocimiento general.
+- [GENERAL] Sin embargo, la medida no es una solución total; factores como la densidad del tráfico y la arquitectura de los edificios también influyen. | El pedido no menciona la densidad del tráfico ni la arquitectura de los edificios como factores influyentes, por lo que es información externa al encargo.
+- [GENERAL] Por ello, la planificación urbana debería integrar el arbolado con otras estrategias de enfriamiento. | El pedido no contiene recomendaciones sobre planificación urbana ni menciona "otras estrategias de enfriamiento".
+- [AÑADE] profundizar en la metodología, los resultados y las posibles aplicaciones de estos hallazgos | El pedido solo indica que se "presentan" los resultados, sin especificar que la conferencia incluirá la metodología ni las posibles aplicaciones.
+
+--- VERSIÓN CORREGIDA ---
+
+TEXTO
+# Las calles con árboles son 3 °C más frescas en verano
+
+El grupo de Ecología Urbana de la Universidad Munin ha medido la temperatura en 40 calles de Madrid durante un año. El 20 de noviembre de 2026 presentará los resultados en una conferencia abierta al público en el campus.
+
+## Medición y diferencia encontrada
+
+Durante el periodo de estudio se registraron las temperaturas de verano en calles con y sin árboles. En promedio, las vías arboladas resultaron 3 °C más frescas que las que carecían de arbolado. Esta diferencia se obtuvo comparando los valores medios de ambas categorías.
+
+## Por qué los árboles enfrían el entorno urbano
+
+Los árboles reducen la temperatura mediante dos procesos principales. Primero, sus hojas realizan la transpiración, liberando vapor de agua que absorbe calor del aire. Segundo, la sombra que proyectan disminuye la radiación directa sobre el pavimento. Ambos efectos combinados explican la reducción de 3 °C observada.
+
+## Implicaciones para la planificación de la ciudad
+
+Este dato sugiere que aumentar la cobertura arbórea en áreas densamente pobladas puede mitigar el efecto de isla de calor urbano. Sin embargo, la medida no es una solución total; factores como la densidad del tráfico y la arquitectura de los edificios también influyen. Por ello, la planificación urbana debería integrar el arbolado con otras estrategias de enfriamiento.
+
+La conferencia del 20 de noviembre permitirá a la comunidad universitaria y al público en general profundizar en los resultados. Para más información, visita la página web de la Universidad Munin o contacta al grupo de Ecología Urbana.
+
+NOTAS
+DATOS QUE FALTAN: Fuente de los datos de temperatura (instrumentos, organismo responsable). Detalles metodológicos específicos (frecuencia de medición, horarios). Información sobre si la conferencia incluirá la metodología o aplicaciones, que no está en el pedido.  
+A VERIFICAR: Fecha de la conferencia (20 noviembre 2026), cifra de diferencia de temperatura (3 °C), número de calles estudiadas (40). Comparación usada: “como una nevera” para ilustrar la frescura; la comparación deja de ser válida porque una nevera mantiene una temperatura constante, mientras que el efecto de los árboles varía según la hora y la radiación solar.  
+ENFOQUE: He eliminado la referencia a “varios días de máxima calor” y la mención a la metodología y aplicaciones, ajustando el texto a los datos exactos del pedido.
+
+Avisos: ninguno
+
+CAPA 1: 0 problemas
+- ninguno
+
+CAPA 2: 8 problemas | descartados por el filtro: 0
+- [CONTRADICE] Las calles con árboles son 3 °C más frescas en verano | El pedido especifica que la diferencia de 3 grados fue "de media" en verano, mientras que el titular lo presenta como un hecho absoluto sin esa cualificación estadística.
+- [AÑADE] Esta diferencia se obtuvo comparando los valores medios de ambas categorías. | El pedido no detalla la metodología de cálculo (comparación de valores medios), solo indica que se midió la temperatura y se encontró una diferencia media.
+- [GENERAL] Los árboles reducen la temperatura mediante dos procesos principales. Primero, sus hojas realizan la transpiración, liberando vapor de agua que absorbe calor del aire. Segundo, la sombra que proyectan disminuye la radiación directa sobre el pavimento. | Es una explicación de conocimiento general sobre la biología vegetal y la física del calor que no aparece en el pedido ni en la ficha del cliente.
+- [AÑADE] Ambos efectos combinados explican la reducción de 3 °C observada. | El pedido no atribuye la causa de la reducción de temperatura a la transpiración ni a la sombra, solo reporta el dato medido.
+- [AÑADE] Este dato sugiere que aumentar la cobertura arbórea en áreas densamente pobladas puede mitigar el efecto de isla de calor urbano. | El pedido no contiene conclusiones sobre planificación urbana ni menciona el concepto de "isla de calor urbano".
+- [AÑADE] Sin embargo, la medida no es una solución total; factores como la densidad del tráfico y la arquitectura de los edificios también influyen. | El pedido no menciona el tráfico ni la arquitectura como factores influyentes en la temperatura.
+- [AÑADE] Por ello, la planificación urbana debería integrar el arbolado con otras estrategias de enfriamiento. | El pedido no incluye recomendaciones sobre planificación urbana ni estrategias de enfriamiento adicionales.
+- [AÑADE] permitirá a la comunidad universitaria y al público en general profundizar en los resultados | El pedido indica que la conferencia es "abierta al público", pero no especifica que el objetivo sea "profundizar" en los resultados ni menciona explícitamente a la "comunidad universitaria" como audiencia diferenciada.

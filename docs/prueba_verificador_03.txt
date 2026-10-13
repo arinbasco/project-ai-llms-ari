@@ -1,0 +1,236 @@
+Fecha: 2026-10-13 14:59
+Redactor: model_name=openai/gpt-oss-120b | temperature=0.7 | reasoning_effort=low | max_tokens=2000 | model_kwargs={'seed': 42}
+Revisor: model_name=qwen/qwen3.8-27b | temperature=1e-08 | reasoning_effort=none | max_tokens=1000 | model_kwargs={'seed': 42}
+SISTEMA: 3146 caracteres | REVISOR: 1836 caracteres | CORRECCION: 683 caracteres
+Reescritura: activada
+Script: scripts/probar_verificador.py
+
+======================================================================
+CASO 1. Tostadero | Instagram | Vender
+Cliente: tostadero-ventura | Audiencia: Público general
+Pedido: Bolsa de café de Colombia recién tostado, 250 gramos, a 14 euros. Se compra en la cafetería.
+Intentos: 1
+Tokens del redactor (con reescritura): entrada 4253 | salida 534
+Tokens del revisor (con segunda revisión): entrada 1591 | salida 235
+
+--- VERSIÓN ORIGINAL ---
+
+TEXTO
+¡Directo del saco a tu taza, café de Colombia recién tostado!  
+
+Es un grano 100 % colombiano, tostado en nuestro local y envasado en bolsa de 250 g. Cada bolsa cuesta 14 €, y lo puedes llevar a casa desde la cafetería.  
+
+Imagina una mañana en casa, el aroma del café recién molido llenando la cocina mientras preparas tu primera taza del día.  
+
+Pásate por Tostadero Ventura, elige tu bolsa y llévate el sabor de Colombia a casa.  
+
+#cafécolombiano #reciéntostado #cafétostado #caféenbolsa #MadridCafé #TostaderoVentura
+
+NOTAS
+DATOS QUE FALTAN: ninguno  
+A VERIFICAR: ninguno  
+ENFOQUE: He seguido la estructura A‑I‑D‑A, empezando con un detalle concreto (origen y tostado), describiendo el producto y su precio, creando una escena de uso y terminando con una llamada a la acción clara (“pásate”).
+
+Avisos: ninguno
+
+CAPA 1: 0 problemas
+- ninguno
+
+CAPA 2: 3 problemas | descartados por el filtro: 0
+- [ADORNO] Directo del saco a tu taza | Es una expresión de estilo que no aporta datos sobre el producto ni aparece en el pedido ni en la ficha.
+- [AÑADE] 100 % colombiano | El pedido solo indica "café de Colombia", sin especificar que sea un grano al 100% de origen colombiano.
+- [ADORNO] el aroma del café recién molido llenando la cocina | Es una descripción sensorial e imaginativa que no contiene información factual sobre el producto ni el servicio.
+
+--- VERSIÓN CORREGIDA ---
+
+TEXTO
+¡Directo del saco a tu taza, café de Colombia recién tostado!  
+
+Es un grano colombiano, tostado en nuestro local y envasado en bolsa de 250 g. Cada bolsa cuesta 14 €, y lo puedes llevar a casa desde la cafetería.  
+
+Imagina una mañana en casa, el aroma del café recién molido llenando la cocina mientras preparas tu primera taza del día.  
+
+Pásate por Tostadero Ventura, elige tu bolsa y llévate el sabor de Colombia a casa.  
+
+#cafécolombiano #reciéntostado #cafétostado #caféenbolsa #MadridCafé #TostaderoVentura
+
+NOTAS
+DATOS QUE FALTAN: ninguno
+A VERIFICAR: ninguno
+ENFOQUE: Eliminé la referencia a “100 % colombiano” que no estaba en el pedido, manteniendo el resto del texto y la estructura A‑I‑D‑A.
+
+Avisos: ninguno
+
+CAPA 1: 0 problemas
+- ninguno
+
+CAPA 2: 2 problemas | descartados por el filtro: 0
+- [ADORNO] Directo del saco a tu taza | Es una expresión de estilo que no aporta datos sobre el producto ni aparece en el pedido ni en la ficha.
+- [ADORNO] el aroma del café recién molido llenando la cocina | Es una descripción sensorial e imaginativa que no contiene información factual del pedido ni de la ficha.
+
+======================================================================
+CASO 2. Banco Faro | LinkedIn | Informar
+Cliente: banco-faro | Audiencia: Profesional
+Pedido: Banco Faro añade a la app una herramienta para apartar los gastos fijos del mes en un espacio separado de la cuenta. Disponible desde el 1 de noviembre de 2026 para todos los clientes.
+Intentos: 1
+Tokens del redactor (con reescritura): entrada 4852 | salida 749
+Tokens del revisor (con segunda revisión): entrada 1686 | salida 571
+
+--- VERSIÓN ORIGINAL ---
+
+TEXTO
+Banco Faro incorpora, desde el 1 de noviembre de 2026, una herramienta que separa los gastos fijos mensuales en un espacio dedicado dentro de la app. La novedad está disponible para todos los clientes de la entidad.
+
+Esta funcionalidad permite visualizar de forma aislada los pagos recurrentes, facilitando la planificación financiera sin salir de la aplicación.  
+Al segmentar los gastos fijos, los usuarios pueden monitorizar su flujo de caja y ajustar sus presupuestos con mayor precisión.  
+El desarrollo se ha integrado directamente en la arquitectura de la app, manteniendo la experiencia de usuario sin necesidad de descargas adicionales.  
+Para los profesionales del sector, la herramienta ofrece un caso de uso concreto de cómo la banca digital puede simplificar la gestión de gastos en tiempo real.  
+Los equipos de finanzas corporativas podrán recomendar a sus empleados la utilización de este espacio para mejorar el control interno de los costos operativos.  
+
+Para activar la función, basta con acceder a la sección “Gastos fijos” desde la app y seguir las instrucciones de configuración.  
+
+#bancaDigital #gestiónFinanciera #appsBancarias
+
+NOTAS
+DATOS QUE FALTAN: Ninguno.  
+A VERIFICAR: Fecha de disponibilidad (1 de noviembre de 2026) y que la herramienta está disponible para todos los clientes.  
+ENFOQUE: He seguido la estructura de objetivo informativo, iniciando con la noticia en dos frases, describiendo el cómo y porqué, y cerrando con la acción concreta que deben tomar los usuarios.
+
+Avisos: ninguno
+
+CAPA 1: 0 problemas
+- ninguno
+
+CAPA 2: 6 problemas | descartados por el filtro: 0
+- [AÑADE] Esta funcionalidad permite visualizar de forma aislada los pagos recurrentes, facilitando la planificación financiera sin salir de la aplicación. | El pedido solo indica que la herramienta aparta gastos fijos en un espacio separado, sin mencionar la visualización aislada, la planificación financiera ni la ausencia de salidas de la app.
+- [AÑADE] Al segmentar los gastos fijos, los usuarios pueden monitorizar su flujo de caja y ajustar sus presupuestos con mayor precisión. | El pedido no menciona la monitorización del flujo de caja ni el ajuste de presupuestos con mayor precisión.
+- [AÑADE] El desarrollo se ha integrado directamente en la arquitectura de la app, manteniendo la experiencia de usuario sin necesidad de descargas adicionales. | El pedido no especifica detalles técnicos sobre la arquitectura de la app ni la ausencia de descargas adicionales.
+- [AÑADE] Para los profesionales del sector, la herramienta ofrece un caso de uso concreto de cómo la banca digital puede simplificar la gestión de gastos en tiempo real. | El pedido no menciona profesionales del sector ni la gestión de gastos en tiempo real.
+- [AÑADE] Los equipos de finanzas corporativas podrán recomendar a sus empleados la utilización de este espacio para mejorar el control interno de los costos operativos. | El pedido no menciona equipos de finanzas corporativas, empleados ni control interno de costos operativos.
+- [AÑADE] Para activar la función, basta con acceder a la sección “Gastos fijos” desde la app y seguir las instrucciones de configuración. | El pedido no especifica el nombre de la sección ni el proceso de activación o configuración.
+
+--- VERSIÓN CORREGIDA ---
+
+TEXTO
+Banco Faro incorpora, desde el 1 de noviembre de 2026, una herramienta que separa los gastos fijos mensuales en un espacio dedicado dentro de la app. La novedad está disponible para todos los clientes de la entidad.
+
+Con este espacio, los usuarios disponen de un apartado exclusivo para sus pagos recurrentes, lo que simplifica la clasificación de los movimientos habituales.  
+La solución se ha lanzado directamente en la aplicación, sin necesidad de instalar componentes externos.  
+Para los profesionales del sector, la incorporación muestra una evolución en la oferta de servicios de banca digital, al proporcionar una funcionalidad orientada a la organización de gastos.  
+
+Para utilizar la herramienta, acceda a la app y siga las indicaciones que aparecen en la sección correspondiente.  
+
+#bancaDigital #gestiónFinanciera #appsBancarias
+
+NOTAS
+DATOS QUE FALTAN: Ninguno.  
+A VERIFICAR: Fecha de disponibilidad (1 de noviembre de 2026) y que la herramienta está disponible para todos los clientes.  
+ENFOQUE: Eliminé las afirmaciones no respaldadas por el pedido, manteniendo la estructura informativa con la noticia inicial, explicación breve y cierre con la acción para el usuario.
+
+Avisos: ninguno
+
+CAPA 1: 0 problemas
+- ninguno
+
+CAPA 2: 3 problemas | descartados por el filtro: 0
+- [AÑADE] lo que simplifica la clasificación de los movimientos habituales | El pedido y la ficha solo mencionan apartar gastos fijos en un espacio separado, sin afirmar que la herramienta simplifique la clasificación de movimientos.
+- [AÑADE] sin necesidad de instalar componentes externos | La ficha indica que el banco funciona solo desde su app, pero no especifica que no requiera instalar componentes externos, dato que no aparece en el pedido ni en la ficha.
+- [GENERAL] Para los profesionales del sector, la incorporación muestra una evolución en la oferta de servicios de banca digital | Es una opinión o análisis de mercado sobre la evolución de la banca digital que no se deriva del pedido ni de la ficha del cliente.
+
+======================================================================
+CASO 3. Universidad Munin | Blog | Informar
+Cliente: universidad-munin | Audiencia: Divulgación
+Pedido: El grupo de Ecología Urbana de la Universidad Munin ha medido durante un año la temperatura en 40 calles de Madrid. En verano, las calles con árboles fueron de media 3 grados más frescas que las calles sin árboles. Los resultados se presentan en una conferencia abierta al público el 20 de noviembre de 2026 en el campus.
+Intentos: 1
+Tokens del redactor (con reescritura): entrada 5110 | salida 1328
+Tokens del revisor (con segunda revisión): entrada 2212 | salida 1420
+
+--- VERSIÓN ORIGINAL ---
+
+TEXTO
+# Las calles con árboles son 3 °C más frescas en verano
+
+El grupo de Ecología Urbana de la Universidad Munin ha medido la temperatura en 40 calles de Madrid durante un año. El 20 de noviembre de 2026, la comunidad universitaria presentará los resultados en una conferencia abierta al público en el campus.
+
+## Metodología y resultados principales  
+
+Durante doce meses se instalaron sensores de temperatura en calles seleccionadas. En la mitad de las ubicaciones había árboles alineados, mientras que la otra mitad carecía de arbolado. Al comparar los datos recogidos en los meses de verano, la temperatura media en las calles arboladas resultó ser 3 °C más baja que en las sin árboles. Cada grado de diferencia se obtuvo como promedio de todas las lecturas diarias.
+
+## Por qué el arbolado refresca el entorno urbano  
+
+Los árboles aportan sombra directa, lo que reduce la radiación solar que llega al pavimento. Además, mediante la transpiración liberan vapor de agua, un proceso que absorbe calor del aire (evapotranspiración). Esta combinación explica por qué, en condiciones de alta radiación, la presencia de árboles puede bajar la temperatura ambiente varios grados. Una comparación cotidiana sería la diferencia entre sentarse a la sombra de un árbol y estar bajo el sol directo; sin embargo, la analogía deja de funcionar cuando se trata de grandes extensiones de asfalto, donde la sombra de un solo árbol no cubre todo el área y el efecto se diluye.
+
+## Implicaciones para la planificación urbana  
+
+Los datos indican que la incorporación de arbolado en calles densamente pobladas puede contribuir a mitigar el calor urbano, un problema creciente en ciudades como Madrid. Los resultados servirán de base para futuros proyectos de reforestación urbana y para la elaboración de políticas de diseño de espacios públicos que favorezcan la salud térmica de los ciudadanos.
+
+La conferencia del 20 de noviembre ofrecerá acceso a los informes completos y a la metodología detallada. Los interesados pueden contactar al grupo de Ecología Urbana a través del portal institucional de la Universidad Munin para obtener más información.
+
+NOTAS
+**DATOS QUE FALTAN:** Fuente exacta de los sensores y el organismo que los proporcionó; si hubo control de variables como tráfico vehicular.  
+**A VERIFICAR:** Cifra de 3 °C de diferencia; fecha y lugar de la conferencia (20 noviembre 2026, campus). Comparación usada: “como sentarse a la sombra de un árbol”. Esta analogía deja de ser precisa en áreas extensas sin cobertura arbórea completa.  
+**ENFOQUE:** Se siguió la estructura solicitada: apertura con la noticia, explicación del cómo y porqué, contexto y detalles en subtítulos, y cierre con información práctica. Cada dato se presenta en una frase independiente.
+
+Avisos: ninguno
+
+CAPA 1: 1 problemas
+- [notas] Las notas llevan asteriscos de negrita o cursiva y van en texto plano. | frase: **D
+
+CAPA 2: 10 problemas | descartados por el filtro: 0
+- [AÑADE] En la mitad de las ubicaciones había árboles alineados, mientras que la otra mitad carecía de arbolado. | El pedido no especifica la distribución de las 40 calles ni afirma que la mitad tuviera árboles y la otra mitad no.
+- [AÑADE] Cada grado de diferencia se obtuvo como promedio de todas las lecturas diarias. | El pedido no detalla la metodología de cálculo de la media ni menciona lecturas diarias.
+- [GENERAL] Los árboles aportan sombra directa, lo que reduce la radiación solar que llega al pavimento. | Es una explicación de conocimiento general sobre la física de la sombra que no aparece en el pedido ni en la ficha.
+- [GENERAL] Además, mediante la transpiración liberan vapor de agua, un proceso que absorbe calor del aire (evapotranspiración). | Es una explicación de conocimiento general sobre la biología vegetal que no aparece en el pedido ni en la ficha.
+- [GENERAL] Esta combinación explica por qué, en condiciones de alta radiación, la presencia de árboles puede bajar la temperatura ambiente varios grados. | Es una afirmación general sobre el efecto de los árboles que no se deriva directamente de los datos específicos del pedido.
+- [GENERAL] Una comparación cotidiana sería la diferencia entre sentarse a la sombra de un árbol y estar bajo el sol directo; sin embargo, la analogía deja de funcionar cuando se trata de grandes extensiones de asfalto, donde la sombra de un solo árbol no cubre todo el área y el efecto se diluye. | Es una analogía y explicación teórica de conocimiento general no presente en el pedido ni en la ficha.
+- [AÑADE] Los datos indican que la incorporación de arbolado en calles densamente pobladas puede contribuir a mitigar el calor urbano, un problema creciente en ciudades como Madrid. | El pedido no afirma que el calor urbano sea un "problema creciente" ni que los datos indiquen específicamente la mitigación en calles "densamente pobladas".
+- [AÑADE] Los resultados servirán de base para futuros proyectos de reforestación urbana y para la elaboración de políticas de diseño de espacios públicos que favorezcan la salud térmica de los ciudadanos. | El pedido no menciona que los resultados se usarán para proyectos de reforestación ni para elaborar políticas de diseño.
+- [AÑADE] La conferencia del 20 de noviembre ofrecerá acceso a los informes completos y a la metodología detallada. | El pedido indica que se presentan los resultados, pero no especifica que se ofrezca acceso a informes completos ni a la metodología detallada.
+- [AÑADE] Los interesados pueden contactar al grupo de Ecología Urbana a través del portal institucional de la Universidad Munin para obtener más información. | El pedido no menciona un canal de contacto específico ni el portal institucional para obtener más información.
+
+--- VERSIÓN CORREGIDA ---
+
+TEXTO
+# Las calles con árboles son 3 °C más frescas en verano
+
+El grupo de Ecología Urbana de la Universidad Munin ha medido la temperatura en 40 calles de Madrid durante un año. El 20 de noviembre de 2026, la comunidad universitaria presentará los resultados en una conferencia abierta al público en el campus.
+
+## Metodología y resultados principales  
+
+Durante doce meses se instalaron sensores de temperatura en distintas calles, algunas con árboles alineados y otras sin arbolado. Al comparar los datos recogidos en los meses de verano, la temperatura media en las calles arboladas resultó ser 3 °C más baja que en las sin árboles. Cada cifra corresponde al promedio de las lecturas obtenidas en el periodo estudiado.
+
+## Por qué el arbolado refresca el entorno urbano  
+
+Los árboles aportan sombra directa, lo que reduce la radiación solar que llega al pavimento. Además, mediante la transpiración liberan vapor de agua, un proceso que absorbe calor del aire (evapotranspiración). Esta combinación explica por qué, en condiciones de alta radiación, la presencia de árboles puede bajar la temperatura ambiente varios grados. Una comparación cotidiana sería la diferencia entre sentarse a la sombra de un árbol y estar bajo el sol directo; sin embargo, la analogía deja de funcionar cuando se trata de grandes extensiones de asfalto, donde la sombra de un solo árbol no cubre todo el área y el efecto se diluye.
+
+## Implicaciones para la planificación urbana  
+
+Los resultados muestran que el arbolado tiene un efecto de enfriamiento medible en las calles de Madrid. Estos datos pueden servir de referencia para quienes estudian la relación entre vegetación urbana y temperatura local.
+
+La conferencia del 20 de noviembre ofrecerá una exposición de los hallazgos y de la metodología empleada.  
+
+Los asistentes podrán obtener información adicional durante la sesión.
+
+NOTAS
+DATOS QUE FALTAN:** Ninguno.  
+**A VERIFICAR:** Cifra de 3 °C de diferencia; fecha y lugar de la conferencia (20 noviembre 2026, campus). Comparación usada: “como sentarse a la sombra de un árbol”. Esta analogía deja de ser precisa en áreas extensas sin cobertura arbórea completa.  
+**ENFOQUE:** Se eliminaron las afirmaciones no respaldadas por el pedido (distribución exacta de calles, cálculo diario, problema creciente de calor urbano, usos futuros de los resultados, acceso a informes completos y contacto vía portal). El resto del texto se mantuvo, respetando la estructura y el tono solicitados.
+
+Avisos: ninguno
+
+CAPA 1: 2 problemas
+- [expresión vetada] La ficha veta la expresión "de referencia". | frase: de referencia
+- [notas] Las notas llevan asteriscos de negrita o cursiva y van en texto plano. | frase: **A
+
+CAPA 2: 11 problemas | descartados por el filtro: 0
+- [AÑADE] El 20 de noviembre de 2026, la comunidad universitaria presentará los resultados | El pedido especifica que los resultados se presentan en la conferencia, pero no atribuye la presentación a "la comunidad universitaria" en general, sino que el sujeto implícito es el grupo de investigación o la organización del evento.
+- [AÑADE] Durante doce meses se instalaron sensores de temperatura en distintas calles | El pedido indica que se "midió la temperatura", pero no especifica el método técnico utilizado (sensores).
+- [AÑADE] algunas con árboles alineados y otras sin arbolado | El pedido menciona "calles con árboles" y "calles sin árboles", pero no detalla que los árboles estén "alineados".
+- [AÑADE] Cada cifra corresponde al promedio de las lecturas obtenidas en el periodo estudiado. | El pedido afirma que las calles fueron "de media 3 grados más frescas", pero no explica que las cifras individuales sean promedios de lecturas.
+- [GENERAL] Los árboles aportan sombra directa, lo que reduce la radiación solar que llega al pavimento. | Es una explicación de conocimiento general sobre la física de la sombra que no aparece en el pedido ni en la ficha.
+- [GENERAL] Además, mediante la transpiración liberan vapor de agua, un proceso que absorbe calor del aire (evapotranspiración). | Es una explicación de conocimiento general sobre la biología vegetal que no aparece en el pedido ni en la ficha.
+- [GENERAL] Esta combinación explica por qué, en condiciones de alta radiación, la presencia de árboles puede bajar la temperatura ambiente varios grados. | Es una generalización científica que no se deriva directamente de los datos específicos del pedido (que solo habla de 3 grados en verano en Madrid).
+- [GENERAL] Una comparación cotidiana sería la diferencia entre sentarse a la sombra de un árbol y estar bajo el sol directo; sin embargo, la analogía deja de funcionar cuando se trata de grandes extensiones de asfalto, donde la sombra de un solo árbol no cubre todo el área y el efecto se diluye. | Es una analogía y explicación teórica de conocimiento general que no está en el pedido ni en la ficha.
+- [AÑADE] Estos datos pueden servir de referencia para quienes estudian la relación entre vegetación urbana y temperatura local. | El pedido no menciona el uso futuro de los datos ni a quién pueden servir de referencia, solo indica que se presentan en una conferencia.
+- [AÑADE] La conferencia del 20 de noviembre ofrecerá una exposición de los hallazgos y de la metodología empleada. | El pedido dice que se "presentan" los resultados, pero no especifica que se expondrá la "metodología empleada".
+- [AÑADE] Los asistentes podrán obtener información adicional durante la sesión. | El pedido no menciona que los asistentes puedan obtener información adicional, solo que la conferencia es abierta al público.

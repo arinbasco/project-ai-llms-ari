@@ -1,8 +1,8 @@
-"""Prueba real del redactor con ficha y de las dos capas del verificador.
+"""Prueba real del sistema completo: redactor, verificador y reescritura.
 
-Por caso hace una llamada al redactor (dos si hay reintento) y una al
-revisor. Guarda el resultado en docs/ con fecha, modelos y configuración
-en la cabecera.
+Por caso: redactor (una o dos llamadas), revisor, y si hay problemas
+corregibles, reescritura y segunda revisión. Guarda el resultado en docs/
+con fecha, modelos y configuración en la cabecera.
 """
 
 import sys
@@ -14,12 +14,12 @@ RAIZ = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(RAIZ / "src"))
 
 from redaccion.llm import obtener_llm, obtener_revisor
-from redaccion.prompts import REVISOR, SISTEMA
+from redaccion.prompts import CORRECCION, REVISOR, SISTEMA
 from redaccion.redactor import Pedido, redactar
 from redaccion.verificador import TIPOS_CAPA2
 
-SALIDA = RAIZ / "docs" / "prueba_verificador_02.txt"
-PAUSA_SEGUNDOS = 30
+SALIDA = RAIZ / "docs" / "prueba_verificador_04.txt"
+PAUSA_SEGUNDOS = 90
 
 CASOS = [
     ("Tostadero | Instagram | Vender", Pedido(
@@ -61,6 +61,34 @@ def configuracion(llm):
                       for campo in campos)
 
 
+def bloque_version(titulo, version):
+    """Texto, notas, avisos y problemas de una versión (original o corregida)."""
+    capa1 = [p for p in version.problemas if p.regla not in TIPOS_CAPA2]
+    capa2 = [p for p in version.problemas if p.regla in TIPOS_CAPA2]
+    lineas = [
+        titulo,
+        "",
+        "TEXTO",
+        version.texto,
+        "",
+        "NOTAS",
+        version.notas or "(sin notas)",
+        "",
+        f"Avisos: {version.avisos or 'ninguno'}",
+        "",
+        f"CAPA 1: {len(capa1)} problemas",
+    ]
+    lineas += [f"- [{p.regla}] {p.motivo} | frase: {p.frase}"
+               for p in capa1] or ["- ninguno"]
+    lineas += [
+        "",
+        f"CAPA 2: {len(capa2)} problemas | descartados por el filtro: {version.descartados}",
+    ]
+    lineas += [f"- [{p.regla}] {p.frase} | {p.motivo}"
+               for p in capa2] or ["- ninguno"]
+    return lineas
+
+
 def main():
     if SALIDA.exists():
         sys.exit(f"{SALIDA.name} ya existe. Cambia SALIDA para no sobrescribirlo.")
@@ -71,7 +99,9 @@ def main():
         f"Fecha: {datetime.now():%Y-%m-%d %H:%M}",
         f"Redactor: {configuracion(llm)}",
         f"Revisor: {configuracion(revisor)}",
-        f"SISTEMA: {len(SISTEMA)} caracteres | REVISOR: {len(REVISOR)} caracteres",
+        (f"SISTEMA: {len(SISTEMA)} caracteres | REVISOR: {len(REVISOR)} caracteres | "
+         f"CORRECCION: {len(CORRECCION)} caracteres"),
+        "Reescritura: activada",
         f"Script: scripts/{Path(__file__).name}",
         "",
     ]
@@ -83,8 +113,6 @@ def main():
         print(f"Caso {numero}: {nombre}")
 
         resultado = redactar(pedido, llm, revisor=revisor)
-        capa1 = [p for p in resultado.problemas if p.regla not in TIPOS_CAPA2]
-        capa2 = [p for p in resultado.problemas if p.regla in TIPOS_CAPA2]
 
         lineas += [
             "=" * 70,
@@ -92,29 +120,18 @@ def main():
             f"Cliente: {pedido.cliente} | Audiencia: {pedido.audiencia}",
             f"Pedido: {pedido.tema}",
             f"Intentos: {resultado.intentos}",
-            (f"Tokens del redactor: entrada {resultado.tokens_entrada} | "
+            (f"Tokens del redactor (con reescritura): entrada {resultado.tokens_entrada} | "
              f"salida {resultado.tokens_salida}"),
-            (f"Tokens del revisor: entrada {resultado.tokens_revisor_entrada} | "
-             f"salida {resultado.tokens_revisor_salida}"),
-            f"Avisos: {resultado.avisos or 'ninguno'}",
+            (f"Tokens del revisor (con segunda revisión): entrada "
+             f"{resultado.tokens_revisor_entrada} | salida {resultado.tokens_revisor_salida}"),
             "",
-            "TEXTO",
-            resultado.texto,
-            "",
-            "NOTAS",
-            resultado.notas or "(sin notas)",
-            "",
-            f"CAPA 1: {len(capa1)} problemas",
         ]
-        lineas += [f"- [{p.regla}] {p.motivo} | frase: {p.frase}"
-                   for p in capa1] or ["- ninguno"]
-        lineas += [
-            "",
-            f"CAPA 2: {len(capa2)} problemas | descartados por el filtro: "
-            f"{resultado.descartados}",
-        ]
-        lineas += [f"- [{p.regla}] {p.frase} | {p.motivo}"
-                   for p in capa2] or ["- ninguno"]
+        lineas += bloque_version("--- VERSIÓN ORIGINAL ---", resultado)
+        lineas.append("")
+        if resultado.correccion:
+            lineas += bloque_version("--- VERSIÓN CORREGIDA ---", resultado.correccion)
+        else:
+            lineas += ["--- VERSIÓN CORREGIDA ---", "(no hizo falta reescribir)"]
         lineas.append("")
 
         SALIDA.write_text("\n".join(lineas), encoding="utf-8")
