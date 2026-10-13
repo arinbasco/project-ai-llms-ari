@@ -1,7 +1,8 @@
 """Vuelve a revisar con la capa 2 los textos de una prueba ya guardada.
 
-Sirve para comparar versiones del prompt del revisor con los mismos textos,
-porque con gpt-oss los textos cambian en cada ejecución.
+Sirve para comparar configuraciones del revisor con los mismos textos,
+porque con gpt-oss los textos cambian en cada ejecución. La configuración
+de cada pasada se cambia en las constantes de abajo.
 """
 
 import sys
@@ -19,8 +20,15 @@ from redaccion.llm import obtener_revisor
 from redaccion.prompts import REVISOR
 from redaccion.verificador import verificar_capa2
 
+# --- Configuración de esta pasada ---
+RAZONAMIENTO = "low"
+TEMPERATURA = 0
+MAX_TOKENS = 2000
+FORMATO_RAZONAMIENTO = "parsed"
+SALIDA = RAIZ / "docs" / "prueba_revisor_04.txt"
+# -------------------------------------
+
 ENTRADA = RAIZ / "docs" / "prueba_verificador_02.txt"
-SALIDA = RAIZ / "docs" / "prueba_revisor_03.txt"
 PAUSA_SEGUNDOS = 20
 
 
@@ -40,10 +48,15 @@ def main():
         sys.exit(f"{SALIDA.name} ya existe. Cambia SALIDA para no sobrescribirlo.")
 
     textos = leer_textos(ENTRADA)
-    revisor = obtener_revisor()
+    revisor = obtener_revisor(
+        temperatura=TEMPERATURA,
+        razonamiento=RAZONAMIENTO,
+        max_tokens=MAX_TOKENS,
+        formato_razonamiento=FORMATO_RAZONAMIENTO,
+    )
     lineas = [
         f"Fecha: {datetime.now():%Y-%m-%d %H:%M}",
-        f"Revisor: {configuracion(revisor)}",
+        f"Revisor: {configuracion(revisor)} | reasoning_format={revisor.reasoning_format}",
         f"REVISOR: {len(REVISOR)} caracteres",
         f"Textos de: docs/{ENTRADA.name}",
         f"Script: scripts/{Path(__file__).name}",
@@ -57,11 +70,23 @@ def main():
         print(f"Caso {numero}: {nombre}")
 
         revision = verificar_capa2(texto, pedido, cargar_cliente(pedido.cliente), revisor)
+        posible_corte = revision.tokens_salida >= MAX_TOKENS - 10
+
         lineas += [
             "=" * 70,
             f"CASO {numero}. {nombre}",
+            f"Pedido: {pedido.tema}",
+            "",
+            "TEXTO",
+            texto,
+            "",
             (f"Tokens del revisor: entrada {revision.tokens_entrada} | "
-             f"salida {revision.tokens_salida}"),
+             f"salida {revision.tokens_salida}"
+             + (" | POSIBLE CORTE POR LÍMITE DE TOKENS" if posible_corte else "")),
+            "",
+            "RAZONAMIENTO DEL REVISOR",
+            revision.razonamiento or "(vacío)",
+            "",
             (f"CAPA 2: {len(revision.problemas)} problemas | descartados por el "
              f"filtro: {revision.descartados}"),
         ]

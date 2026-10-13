@@ -6,6 +6,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from langchain_core.language_models.fake_chat_models import FakeListChatModel
+from langchain_core.messages import AIMessage
 
 from redaccion.clientes import cargar_cliente
 from redaccion.redactor import Pedido
@@ -263,3 +264,28 @@ def test_capa2_descarta_bloques_mal_formados():
 def test_capa2_tolera_negritas():
     revision = revisar_con("**FRASE:** aroma intenso\n**TIPO:** ADORNO\n**MOTIVO:** adjetivo")
     assert len(revision.problemas) == 1
+
+class RevisorFijo:
+    """Revisor falso que devuelve siempre el mismo mensaje, ya construido."""
+
+    def __init__(self, mensaje):
+        self.mensaje = mensaje
+
+    def invoke(self, mensajes):
+        return self.mensaje
+
+
+def test_capa2_guarda_el_razonamiento():
+    mensaje = AIMessage(content="NINGUNO",
+                        additional_kwargs={"reasoning_content": "Reviso frase por frase."})
+    revision = verificar_capa2(TEXTO_BLOG, PEDIDO_UNI, CLIENTE_UNI, RevisorFijo(mensaje))
+    assert revision.razonamiento == "Reviso frase por frase."
+
+
+def test_capa2_ignora_el_razonamiento_dentro_del_texto():
+    contenido = ("<think>FRASE: algo inventado\nTIPO: AÑADE\nMOTIVO: pensando</think>"
+                 "FRASE: aroma intenso\nTIPO: ADORNO\nMOTIVO: adjetivo")
+    revision = verificar_capa2(TEXTO_BLOG, PEDIDO_UNI, CLIENTE_UNI,
+                               RevisorFijo(AIMessage(content=contenido)))
+    assert [p.frase for p in revision.problemas] == ["aroma intenso"]
+    assert revision.descartados == 0

@@ -310,6 +310,7 @@ TIPOS_CAPA2 = ("CONTRADICE", "AÑADE", "GENERAL", "ADORNO")
 CAMPO = re.compile(r"^\s*[-•]?\s*(FRASE|TIPO|MOTIVO)\s*:\s*(.*)$", re.IGNORECASE)
 SEPARADOR_BLOQUES = re.compile(r"\n\s*\n")
 COMILLAS = str.maketrans({"“": '"', "”": '"', "«": '"', "»": '"', "‘": "'", "’": "'"})
+PENSAMIENTO = re.compile(r"<think>.*?</think>", re.DOTALL)
 
 
 @dataclass
@@ -320,7 +321,7 @@ class Revision:
     descartados: int = 0
     tokens_entrada: int = 0
     tokens_salida: int = 0
-
+    razonamiento: str = ""
 
 def armar_mensajes_revisor(texto, pedido, cliente):
     """Mensaje de sistema y de usuario para el revisor."""
@@ -377,11 +378,15 @@ def verificar_capa2(texto, pedido, cliente, llm=None):
     respuesta = llm.invoke(armar_mensajes_revisor(texto, pedido, cliente))
     uso = respuesta.usage_metadata or {}
 
-    problemas, mal_formados = leer_revision(respuesta.content)
+    contenido = PENSAMIENTO.sub("", respuesta.content)
+    razonamiento = respuesta.additional_kwargs.get("reasoning_content", "")
+
+    problemas, mal_formados = leer_revision(contenido)
     validos, citas_falsas = filtrar_citas(problemas, texto)
     return Revision(
         problemas=validos,
         descartados=mal_formados + citas_falsas,
         tokens_entrada=uso.get("input_tokens", 0),
         tokens_salida=uso.get("output_tokens", 0),
+        razonamiento=razonamiento,
     )

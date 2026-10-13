@@ -1,0 +1,183 @@
+Fecha: 2026-10-13 02:53
+Revisor: model_name=qwen/qwen3.8-27b | temperature=1e-08 | reasoning_effort=low | max_tokens=2000 | model_kwargs={'seed': 42} | reasoning_format=parsed
+REVISOR: 1836 caracteres
+Textos de: docs/prueba_verificador_02.txt
+Script: scripts/revisar_prueba.py
+
+======================================================================
+CASO 1. Tostadero | Instagram | Vender
+Pedido: Bolsa de café de Colombia recién tostado, 250 gramos, a 14 euros. Se compra en la cafetería.
+
+TEXTO
+Descubre el aroma de Colombia en cada sorbo: nuestro café recién tostado, 250 g, por 14 €.
+
+Es un grano 100 % colombiano, tostado al momento en nuestro local, lo que conserva sus notas intensas y equilibradas. Cada bolsa lleva el sabor auténtico de la finca a tu taza, ya sea en casa o en la barra.
+
+Imagina una mañana tranquila, una taza humeante y el aroma que llena la cocina mientras lees el periódico. Ese momento empieza con nuestro café recién tostado.
+
+Pásate por Tostadero Ventura, elige tu bolsa y llévatela a casa.
+
+#cafécolombiano #reciéntostado #caféteriaMadrid #caféenbolsa #tostadorlocal #tostaderoventura
+
+Tokens del revisor: entrada 842 | salida 2000 | POSIBLE CORTE POR LÍMITE DE TOKENS
+
+RAZONAMIENTO DEL REVISOR
+Let me go through the text phrase by phrase and check against the pedido and ficha.
+
+PEDIDO: Bolsa de café de Colombia recién tostado, 250 gramos, a 14 euros. Se compra en la cafetería.
+
+FICHA: Cafetería de barrio en Madrid que tuesta su propio café en el mismo local. Vende café para tomar allí y en bolsa para llevar a casa, y organiza talleres y actividades. Es un negocio pequeño e independiente.
+
+Now let me check each phrase:
+
+1. "Descubre el aroma de Colombia en cada sorbo" - "aroma de Colombia" is a bit of an adornment, but "Colombia" is in the pedido. "aroma" is ADORNO. "en cada sorbo" is ADORNO.
+
+2. "nuestro café recién tostado, 250 g, por 14 €" - This matches the pedido exactly. No problem.
+
+3. "Es un grano 100 % colombiano" - The pedido says "café de Colombia". "100% colombiano" is a stronger claim than "de Colombia". The pedido says "café de Colombia" which could mean it's from Colombia, but "100% colombiano" is a specific claim about the composition. Actually, "café de Colombia" in the pedido implies it's Colombian coffee. "100% colombiano" is a specific claim that goes beyond what the pedido states. The pedido says "café de Colombia" - this could be interpreted as the coffee being from Colombia. "100% colombiano" adds a specific percentage claim. I think this is AÑADE because it adds a specific claim (100%) that isn't in the pedido or ficha.
+
+Wait, let me reconsider. "Café de Colombia" in the pedido means the coffee is from Colombia. "100% colombiano" is essentially saying the same thing - it's Colombian coffee. The "100%" is just emphasizing it's entirely Colombian, which is implied by "café de Colombia". I think this is borderline. Actually, "café de Colombia" could mean a blend that includes Colombian coffee, or it could mean it's entirely Colombian. "100% colombiano" makes a specific claim that it's entirely Colombian. I'll flag it as AÑADE because it adds a specific percentage claim not in the pedido.
+
+Hmm, but actually "café de Colombia" most naturally means the coffee is from Colombia, i.e., 100% Colombian. I think this is just rephrasing. Let me not flag it.
+
+4. "tostado al momento en nuestro local" - The ficha says "tuesta su propio café en el mismo local". "Al momento" means "at the moment" / "on the spot". The ficha says they roast their own coffee in the same local. "Al momento" implies it's roasted right when you buy it, which is a stronger claim than "tuesta su propio café en el mismo local". The ficha says they roast in the local, but not necessarily "al momento" (at that very moment). This could be CONTRADICE or AÑADE. Actually, "tostado al momento" adds the idea that it's roasted at the moment of purchase, which isn't stated in the ficha. The ficha just says they roast their own coffee in the same local. It could be roasted that morning, that week, etc. "Al momento" is a specific claim about timing. I'll flag it as AÑADE.
+
+Wait, let me reconsider. "Tuesta su propio café en el mismo local" - this means they roast in the same place. "Tostado al momento en nuestro local" - "al momento" means "at that moment" or "on the spot". This is adding a specific timing claim. I'll flag as AÑADE.
+
+5. "lo que conserva sus notas intensas y equilibradas" - "notas intensas y equilibradas" is ADORNO. It's a stylistic description that doesn't provide factual data.
+
+6. "Cada bolsa lleva el sabor auténtico de la finca a tu taza" - "el sabor auténtico de la finca" - this implies there's a specific farm ("la finca") and that the taste is authentic from that farm. The pedido just says "café de Colombia" - it doesn't mention a specific farm. "La finca" implies a specific origin farm. This is AÑADE because it adds the concept of a specific farm and "auténtico" which is a claim not in the pedido or ficha.
+
+Actually, "la finca" could be generic (a farm in general) or specific. In context, "el sabor auténtico de la finca" sounds like it's referring to a specific farm. This is AÑADE.
+
+7. "ya sea en casa o en la barra" - The ficha says "Vende café para tomar allí y en bolsa para llevar a casa". So "en casa" (taking it home) and "en la barra" (drinking there) are both supported by the ficha. No problem.
+
+8. "Imagina una mañana tranquila, una taza humeante y el aroma que llena la cocina mientras lees el periódico." - This is all ADORNO. It's a lifestyle image with no factual data.
+
+9. "Ese momento empieza con nuestro café recién tostado." - "recién tostado" is in the pedido. "Ese momento empieza con" is ADORNO.
+
+10. "Pásate por Tostadero Ventura, elige tu bolsa y llévatela a casa." - "Pásate" is a generic call to action (not flagged). "Tostadero Ventura" is the name from the ficha. "elige tu bolsa y llévatela a casa" - the ficha says they sell in bags to take home. No problem.
+
+Let me reconsider each:
+
+1. "Descubre el aroma de Colombia en cada sorbo" - "aroma" and "en cada sorbo" are ADORNO. But "Colombia" is from the pedido. The phrase as a whole is mostly adornment. I'll flag "el aroma de Colombia en cada sorbo" as ADORNO.
+
+Actually, let me be more precise. The instruction says to flag the shortest fragment containing the problem. "aroma" is the adornment word. But "en cada sorbo" is also adornment. Let me think about what's the minimal fragment.
+
+"Descubre el aroma de Colombia en cada sorbo" - the whole thing is a stylistic phrase. "aroma" is ADORNO, "en cada sorbo" is ADORNO. I'll flag "el aroma de Colombia en cada sorbo" as ADORNO.
+
+Wait, actually "Descubre" is a generic call to action, which I shouldn't flag. So the problem is "el aroma de Colombia en cada sorbo". But "Colombia" is from the pedido. The issue is "aroma" and "en cada sorbo" which are adornments. Let me flag "el aroma... en cada sorbo" - hmm, but I need to copy the exact fragment. Let me just flag "el aroma de Colombia en cada sorbo" as ADORNO.
+
+Actually, re-reading the instructions: "ADORNO: adjetivos, imágenes y frases de estilo que no dan ningún dato". "el aroma de Colombia en cada sorbo" is a stylistic image. I'll flag it.
+
+Let me reconsider "tostado al momento en nuestro local". The ficha says "tuesta su propio café en el mismo local". The text says "tostado al momento en nuestro local". "Al momento" is the addition - it specifies the timing as "at that moment" rather than just "in the local". This is AÑADE.
+
+Let me also reconsider "100% colombiano". The pedido says "café de Colombia". In Spanish, "café de Colombia" means Colombian coffee, which implies it's 100% Colombian. So "100% colombiano" is just a rephrasing. I won't flag it.
+
+Now let me also look at "lo que conserva sus notas intensas y equilibradas". This is a claim about the coffee's characteristics. "Notas intensas y equilibradas" - these are subjective descriptors. Is this ADORNO or AÑADE? The instructions say ADORNO is "adjetivos, imágenes y frases de estilo que no dan ningún dato". "Notas intensas y equilibradas" are adjectives describing the coffee. They don't give factual data. I'll flag as ADORNO.
+
+Wait, but "conserva sus notas" implies that the roasting process preserves the notes, which is a claim about the product's quality. But it's still just adjectives. I'll flag as ADORNO.
+
+Let me finalize my list:
+
+1. "el aroma de Colombia en cada sorbo" - ADORNO - stylistic image with no factual data
+2. "tostado al momento en nuestro local" - AÑADE - the ficha says they roast in the same local, but "al momento" adds a specific timing claim (roasted at that very moment)
+3. "lo que conserva sus notas intensas y equilibradas" - ADORNO - adjectives that
+
+CAPA 2: 0 problemas | descartados por el filtro: 1
+- ninguno
+
+======================================================================
+CASO 2. Banco Faro | LinkedIn | Informar
+Pedido: Banco Faro añade a la app una herramienta para apartar los gastos fijos del mes en un espacio separado de la cuenta. Disponible desde el 1 de noviembre de 2026 para todos los clientes.
+
+TEXTO
+Banco Faro incorpora una nueva herramienta en su app para separar los gastos fijos mensuales en un espacio dedicado. La función está disponible para todos los clientes a partir del 1 de noviembre de 2026.  
+
+La herramienta permite clasificar de forma automática los pagos recurrentes, como alquiler, servicios o suscripciones, en una categoría independiente de la cuenta corriente.  
+
+Con este apartado, los usuarios pueden visualizar el importe total de sus compromisos fijos y planificar mejor su flujo de caja.  
+
+Al estar integrada en la misma plataforma, la gestión de los fondos se realiza sin necesidad de mover dinero entre cuentas ni crear subcuentas externas.  
+
+Para los profesionales de finanzas y gestión de gastos, la novedad facilita la elaboración de presupuestos mensuales y la identificación de oportunidades de ahorro dentro del entorno digital del banco.  
+
+La disponibilidad inmediata a todos los clientes garantiza una adopción rápida y una mayor consistencia en la información financiera que manejan.  
+
+#bancodigital #gestióndefinanzas #innovación
+
+Tokens del revisor: entrada 875 | salida 2000 | POSIBLE CORTE POR LÍMITE DE TOKENS
+
+RAZONAMIENTO DEL REVISOR
+Let me go through the text phrase by phrase and compare it against the pedido and the ficha.
+
+FICHA: Banco que funciona solo desde su app, sin oficinas. Ofrece cuenta, tarjeta y herramientas para organizar gastos y ahorro.
+
+PEDIDO: Banco Faro añade a la app una herramienta para apartar los gastos fijos del mes en un espacio separado de la cuenta. Disponible desde el 1 de noviembre de 2026 para todos los clientes.
+
+Now let me check each phrase:
+
+1. "Banco Faro incorpora una nueva herramienta en su app para separar los gastos fijos mensuales en un espacio dedicado."
+- This matches the pedido: "añade a la app una herramienta para apartar los gastos fijos del mes en un espacio separado de la cuenta." OK, no problem.
+
+2. "La función está disponible para todos los clientes a partir del 1 de noviembre de 2026."
+- Matches the pedido: "Disponible desde el 1 de noviembre de 2026 para todos los clientes." OK.
+
+3. "La herramienta permite clasificar de forma automática los pagos recurrentes, como alquiler, servicios o suscripciones, en una categoría independiente de la cuenta corriente."
+- The pedido says "apartar los gastos fijos del mes en un espacio separado de la cuenta." It doesn't say "de forma automática." That's adding a characteristic (automatic classification) that's not in the pedido or ficha.
+- "como alquiler, servicios o suscripciones" - these are examples of gastos fijos. The pedido says "gastos fijos del mes." Examples like alquiler, servicios, suscripciones are reasonable examples of gastos fijos, but they're not in the pedido or ficha. However, these are just examples to illustrate what "gastos fijos" means. I think this could be considered AÑADE because it specifies types of payments not mentioned in the pedido. Actually, let me reconsider. The pedido says "gastos fijos del mes." Giving examples like "alquiler, servicios o suscripciones" is adding specific information not in the pedido. I'll flag "de forma automática" as AÑADE. The examples... I think they're borderline. They're specific examples that go beyond what the pedido says. I'll flag them as AÑADE too. Actually, let me be more careful. The examples are just illustrating what "gastos fijos" means. They're not really new claims about the product. But "de forma automática" is a functional characteristic not in the pedido. Let me flag that.
+
+Actually, let me reconsider the examples. "alquiler, servicios o suscripciones" - these are specific types of payments. The pedido just says "gastos fijos del mes." Adding specific examples is adding information not in the pedido or ficha. I'll flag it.
+
+Wait, but are these really "comprobable" claims? They're examples. I think "de forma automática" is the main issue here. Let me flag that as AÑADE.
+
+4. "Con este apartado, los usuarios pueden visualizar el importe total de sus compromisos fijos y planificar mejor su flujo de caja."
+- "visualizar el importe total de sus compromisos fijos" - the pedido doesn't mention visualizing the total amount. This is adding a feature. AÑADE.
+- "planificar mejor su flujo de caja" - this is a benefit/result not in the pedido. AÑADE.
+
+Actually, let me think about this more carefully. The pedido says the tool is to "apartar los gastos fijos del mes en un espacio separado de la cuenta." From that, you could infer that you can see your fixed expenses in a separate space. But "visualizar el importe total" is more specific - it says you can see the total amount. That's a specific feature not mentioned. And "planificar mejor su flujo de caja" is a benefit claim not in the pedido.
+
+I'll flag "visualizar el importe total de sus compromisos fijos" as AÑADE (specific feature not in pedido) and "planificar mejor su flujo de caja" as AÑADE (benefit not in pedido).
+
+Actually, let me reconsider. "visualizar el importe total" - is this really adding something? If you have a separate space for fixed expenses, you could reasonably see the total. But the pedido doesn't say that. I'll flag it.
+
+5. "Al estar integrada en la misma plataforma, la gestión de los fondos se realiza sin necesidad de mover dinero entre cuentas ni crear subcuentas externas."
+- "sin necesidad de mover dinero entre cuentas ni crear subcuentas externas" - this is adding a specific characteristic/feature not in the pedido or ficha. The pedido just says "en un espacio separado de la cuenta." It doesn't say anything about not needing to move money or not creating subaccounts. AÑADE.
+
+6. "Para los profesionales de finanzas y gestión de gastos, la novedad facilita la elaboración de presupuestos mensuales y la identificación de oportunidades de ahorro dentro del entorno digital del banco."
+- "Para los profesionales de finanzas y gestión de gastos" - the pedido says "para todos los clientes." This narrows the audience to "profesionales de finanzas y gestión de gastos," which contradicts "todos los clientes." CONTRADICE.
+- "facilita la elaboración de presupuestos mensuales" - not in the pedido. AÑADE.
+- "la identificación de oportunidades de ahorro" - the ficha mentions "herramientas para organizar gastos y ahorro" but the pedido is specifically about separating fixed expenses. "Identificación de oportunidades de ahorro" is a specific claim not in the pedido. AÑADE.
+- "dentro del entorno digital del banco" - the ficha says "funciona solo desde su app, sin oficinas" so "entorno digital" is consistent with the ficha. Not a problem.
+
+Wait, let me reconsider "Para los profesionales de finanzas y gestión de gastos." The pedido says "para todos los clientes." The text says "Para los profesionales de finanzas y gestión de gastos, la novedad facilita..." This is targeting a specific subset. It doesn't contradict "todos los clientes" per se - it's saying that for professionals, it facilitates certain things. It's not saying it's only for professionals. So maybe it's not a contradiction but rather an addition (targeting a specific audience with specific benefits). I'll flag it as AÑADE because it introduces a specific target audience and specific benefits not in the pedido.
+
+Actually, re-reading: "Para los profesionales de finanzas y gestión de gastos, la novedad facilita la elaboración de presupuestos mensuales y la identificación de oportunidades de ahorro." This is adding: (1) a specific target audience, (2) specific benefits (elaboration of monthly budgets, identification of savings opportunities). None of this is in the pedido or ficha. AÑADE.
+
+7. "La disponibilidad inmediata a todos los clientes garantiza una adopción rápida y una mayor consistencia en la información financiera que manejan."
+- "La disponibilidad inmediata" - the pedido says "Disponible desde el 1 de noviembre de 2026." "Inmediata" could be seen as contradicting the specific date. If it's available from a specific future date, it's not "immediate." CONTRADICE.
+- "garantiza una adopción rápida" - this is a promise/prediction not in the pedido. AÑADE.
+- "una mayor consistencia en la información financiera que manejan" - this is a benefit/claim not in the pedido. AÑADE.
+
+Let me reconsider "disponibilidad inmediata." The pedido says "Disponible desde el 1 de noviembre de 2026." The text says "La disponibilidad inmediata a todos los clientes." "Inmediata" implies it's available right now, which contradicts the future date of November 1, 2026. CONTRADICE.
+
+Now let me also reconsider the "de forma automática" in phrase 3. The pedido says "apartar los gastos fijos del mes en un espacio separado de la cuenta." It doesn't say the classification is automatic. Adding "de forma automática" is adding a functional characteristic. AÑADE.
+
+Let me also look at "como alquiler, servicios o suscripciones" again. These are specific examples of gastos fijos. They're not in the pedido or ficha. I think they qualify as AÑADE because they're specific, checkable claims about what the tool handles.
+
+Let me compile my final list:
+
+1. "de forma automática" - AÑADE - The pedido says the tool separates fixed expenses in a separate space, but doesn't mention automatic classification.
+
+2. "como alquiler, servicios o suscripciones" - AÑADE - The pedido mentions "gastos fijos del mes" but doesn't specify types like rent, utilities, or subscriptions.
+
+3. "visualizar el importe total de sus compromisos fijos" - AÑADE - The pedido doesn't mention visualizing the total amount of fixed commitments.
+
+4. "planificar mejor su flujo de caja" - AÑADE - The pedido doesn't mention planning cash flow as a benefit.
+
+5. "sin necesidad de mover dinero entre cuentas ni crear subcuentas externas" - AÑADE - The pedido says "en un espacio separado de la cuenta" but doesn't mention not needing to move money or create external subaccounts.
+
+6
+
+CAPA 2: 0 problemas | descartados por el filtro: 1
+- ninguno
